@@ -1,22 +1,27 @@
 import './App.css';
 import axios from 'axios';
-import { useEffect } from "react"
+import { useEffect, useState } from "react"
 
 function App() {
   //const [getInfo, setGetInfo] = 
+  const [email, setEmail] = useState("Blanca_Ortega@gmail.com");
+  const [password, setPassword] = useState("asd");
 
   useEffect(() => {
-    const getFilmInfo = async () => {
-      const response = await axios.get(
-        "http://localhost:8000/users"
+    const getToken = async () => {
+      const response = await axios.post(
+        "http://localhost:8000/login", {
+        email: email,
+        password: password
+      }
       );
-      console.log(response.data);
     };
-    getFilmInfo();
+    getToken();
   }, []);
 
   return (
     <div className="App">
+
     </div>
   );
 }
