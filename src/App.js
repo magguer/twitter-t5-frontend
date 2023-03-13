@@ -1,29 +1,28 @@
-import './App.css';
-import axios from 'axios';
-import { useEffect, useState } from "react"
+import "./App.css";
+import axios from "axios";
+import { useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
+import { login } from "./redux/userSlice";
 
 function App() {
-  //const [getInfo, setGetInfo] = 
-  const [email, setEmail] = useState("Blanca_Ortega@gmail.com");
+  //const [getInfo, setGetInfo] =
+  const [email, setEmail] = useState("Elsa_Espino@gmail.com");
   const [password, setPassword] = useState("asd");
 
+  const dispatch = useDispatch();
   useEffect(() => {
     const getToken = async () => {
-      const response = await axios.post(
-        "http://localhost:8000/login", {
+      const response = await axios.post("http://localhost:8000/login", {
         email: email,
-        password: password
-      }
-      );
+        password: password,
+      });
+      const user = response.data;
+      dispatch(login(user));
     };
     getToken();
   }, []);
 
-  return (
-    <div className="App">
-
-    </div>
-  );
+  return <div className="App"></div>;
 }
 
 export default App;
