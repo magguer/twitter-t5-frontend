@@ -1,4 +1,4 @@
-import { createSlice, current } from "@reduxjs/toolkit";
+import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {};
 
@@ -10,10 +10,9 @@ const userSlice = createSlice({
       state.userName = action.payload.user;
       state.userToken = action.payload.token;
       state.userId = action.payload.userId;
-      console.log(current(state));
     },
     logOut(state, action) {
-      //   return state.filter((item) => item !== action.payload);
+      return state = {}
     },
   },
 });
