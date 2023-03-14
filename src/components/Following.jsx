@@ -1,4 +1,29 @@
+import { useState, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import axios from "axios";
+import { login } from "../redux/userSlice";
+
 function Following() {
+  const [userFollowing, setuserFollowing] = useState([]);
+
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const username = useSelector((state) => state.user.userName);
+  console.log(username);
+
+  useEffect(() => {
+    const getFollowing = async (e) => {
+      e.preventDefault();
+      const response = await axios.get(
+        "http://localhost:8000/${username}/following"
+      );
+      const user = response.data;
+      dispatch(login(user));
+    };
+    getFollowing();
+  });
+
   return (
     <>
       <div className="row">
