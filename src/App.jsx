@@ -6,11 +6,15 @@ import Followers from "./components/Followers";
 import Following from "./components/Following";
 import Profile from "./components/Profile";
 import Register from "./components/Register";
-
+import Header from "./partials/Header";
+import MoreInfo from "./partials/MoreInfo";
 
 function App() {
   return (
-    <div className="App">
+    <div className="App d-flex">
+      <div>
+        <Header />
+      </div>
       <Routes>
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
@@ -19,6 +23,9 @@ function App() {
         <Route path="/:username/following" element={<Following />} />
         <Route path="/:username" element={<Profile />} />
       </Routes>
+      <div>
+        <MoreInfo />
+      </div>
     </div>
   );
 }

@@ -20,7 +20,7 @@ function Login() {
     });
     const user = response.data;
     dispatch(login(user));
-    navigate(`/${user.user}/following`);
+    navigate(`/`);
   };
 
   return (
