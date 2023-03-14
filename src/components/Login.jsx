@@ -2,7 +2,7 @@
 import { useState } from "react";
 import axios from "axios";
 import { useDispatch } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 // Slice
 import { login } from "../redux/userSlice";
 
@@ -27,11 +27,11 @@ function Login() {
   return (
     <div
       className="text-emphasis-primary"
-      style={{ backgroundColor: "#065990" }}
+      style={{ backgroundColor: "#065990", height: "100vh" }}
     >
-      <div className="container">
+      <div className="container py-5">
         <div
-          className="row g-0 rounded overflow-hidden shadow mt-5"
+          className="row g-0 rounded overflow-hidden shadow"
           style={{ height: "80vh" }}
         >
           <div
@@ -92,13 +92,13 @@ function Login() {
                 </button>
               </div>
               <div className="my-5 text-center">
-                <a
-                  href="/register"
+                <Link
+                  to="/register"
                   className="text-decoration-none text-dark fw-semibold"
                   role="button"
                 >
                   Don't have an account? Sign Up.
-                </a>
+                </Link>
               </div>
             </form>
           </div>
