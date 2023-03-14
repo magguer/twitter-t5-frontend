@@ -7,6 +7,7 @@ import Following from "./components/Following";
 import Profile from "./components/Profile";
 import Register from "./components/Register";
 
+
 function App() {
   return (
     <div className="App">
@@ -14,7 +15,7 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
         <Route path="/" element={<Home />} />
-        <Route path="/:usernamee/followers" element={<Followers />} />
+        <Route path="/:username/followers" element={<Followers />} />
         <Route path="/:username/following" element={<Following />} />
         <Route path="/:username" element={<Profile />} />
       </Routes>
