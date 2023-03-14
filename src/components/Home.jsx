@@ -6,6 +6,7 @@ function Home() {
   const [tweets, setTweets] = useState([]);
   const user = useSelector((state) => state.user);
   // console.log(user);
+
   useEffect(() => {
     const getHome = async () => {
       const response = await axios({
@@ -21,6 +22,7 @@ function Home() {
     };
     getHome();
   }, []);
+
   return (
     <div>
       {tweets.map((tweet) => (

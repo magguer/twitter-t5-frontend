@@ -8,6 +8,8 @@ import Profile from "./components/Profile";
 import Register from "./components/Register";
 import Header from "./partials/Header";
 import MoreInfo from "./partials/MoreInfo";
+import AuthRequire from "./hooks/AuthRequire";
+import NoAuthRequire from "./hooks/NoAuthRequire";
 
 function App() {
   return (
@@ -16,12 +18,16 @@ function App() {
         <Header />
       </div>
       <Routes>
-        <Route path="/login" element={<Login />} />
-        <Route path="/register" element={<Register />} />
-        <Route path="/" element={<Home />} />
-        <Route path="/:username/followers" element={<Followers />} />
-        <Route path="/:username/following" element={<Following />} />
-        <Route path="/:username" element={<Profile />} />
+        <Route element={<NoAuthRequire />}>
+          <Route path="/login" element={<Login />} />
+          <Route path="/register" element={<Register />} />
+        </Route>
+        <Route element={<AuthRequire />}>
+          <Route path="/" element={<Home />} />
+          <Route path="/:username/followers" element={<Followers />} />
+          <Route path="/:username/following" element={<Following />} />
+          <Route path="/:username" element={<Profile />} />
+        </Route>
       </Routes>
       <div>
         <MoreInfo />
