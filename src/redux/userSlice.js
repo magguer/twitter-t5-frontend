@@ -10,7 +10,6 @@ const userSlice = createSlice({
       state.userName = action.payload.user;
       state.userToken = action.payload.token;
       state.userId = action.payload.userId;
-      console.log(current(state));
     },
     logOut(state, action) {
       return state = {}
