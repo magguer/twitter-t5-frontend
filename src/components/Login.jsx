@@ -9,7 +9,6 @@ import { login } from "../redux/userSlice";
 function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
@@ -21,7 +20,7 @@ function Login() {
     });
     const user = response.data;
     dispatch(login(user));
-    navigate("/");
+    navigate(`/${user.user}/following`);
   };
 
   return (

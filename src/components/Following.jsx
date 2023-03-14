@@ -2,27 +2,21 @@ import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
-import { login } from "../redux/userSlice";
 
 function Following() {
-  const [userFollowing, setuserFollowing] = useState([]);
+  const [userFollowing, setUserFollowing] = useState([]);
 
-  const navigate = useNavigate();
-  const dispatch = useDispatch();
-  const username = useSelector((state) => state.user.userName);
-  console.log(username);
-
+  const user = useSelector((state) => state.user);
   useEffect(() => {
-    const getFollowing = async (e) => {
-      e.preventDefault();
+    const getFollowing = async () => {
       const response = await axios.get(
-        "http://localhost:8000/${username}/following"
+        `http://localhost:8000/usuarios/${user.userName}/following`
       );
-      const user = response.data;
-      dispatch(login(user));
+      console.log(response);
+      setUserFollowing(response.data.users);
     };
     getFollowing();
-  });
+  }, []);
 
   return (
     <>
@@ -75,6 +69,13 @@ function Following() {
           </div>
           <div className="d-flex flex-column border-top pt-4">
             {/* <!-- TO DO: Hacer que entre a el arreglo following dentro del Modelo User --> */}
+            {userFollowing.map((user) => {
+              return (
+                <div>
+                  <h2>{user.firstname}</h2>
+                </div>
+              );
+            })}
             {/* <% for (const smallUser of users){%>
           <!-- comment -->
           <!-- comment -->
