@@ -14,7 +14,7 @@ function Login() {
 
   const getToken = async (e) => {
     e.preventDefault();
-    const response = await axios.post("http://localhost:8000/token", {
+    const response = await axios.post("http://localhost:8000/usuarios/tokens", {
       email,
       password,
     });

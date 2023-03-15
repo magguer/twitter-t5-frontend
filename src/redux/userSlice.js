@@ -15,7 +15,7 @@ const userSlice = createSlice({
       state.userImage = action.payload.userImage;
       state.userFollowers = action.payload.userFollowers
       state.userFollowing = action.payload.userFollowing
-      console.log(state.userFollowing);
+
     },
     logOut(state, action) {
       return (state = {});

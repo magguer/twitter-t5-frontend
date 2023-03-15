@@ -15,7 +15,7 @@ function Home() {
         },
         method: "get",
 
-        url: "http://localhost:8000/",
+        url: "http://localhost:8000/tweets/",
       });
       setTweets(response.data.allTweets);
     };
