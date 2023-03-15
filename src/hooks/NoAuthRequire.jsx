@@ -7,7 +7,6 @@ function NoAuthRequire() {
   if (user.userToken) {
     return <Navigate to="/" />;
   } else {
-    console.log("llego");
     return <Outlet />;
   }
 }

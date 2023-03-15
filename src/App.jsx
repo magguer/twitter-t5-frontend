@@ -10,27 +10,26 @@ import Header from "./partials/Header";
 import MoreInfo from "./partials/MoreInfo";
 import AuthRequire from "./hooks/AuthRequire";
 import NoAuthRequire from "./hooks/NoAuthRequire";
+import Layout from "./layout/Layout";
 
 function App() {
   return (
-    <div className="App d-flex">
-      <div>
-        <Header />
-      </div>
-      <Routes>
-        <Route element={<NoAuthRequire />}>
-          <Route path="/login" element={<Login />} />
-          <Route path="/register" element={<Register />} />
-        </Route>
-        <Route element={<AuthRequire />}>
-          <Route path="/" element={<Home />} />
-          <Route path="/:username/followers" element={<Followers />} />
-          <Route path="/:username/following" element={<Following />} />
-          <Route path="/:username" element={<Profile />} />
-        </Route>
-      </Routes>
-      <div>
-        <MoreInfo />
+    <div className="App">
+      <div className="">
+        <Routes>
+          <Route element={<NoAuthRequire />}>
+            <Route path="/login" element={<Login />} />
+            <Route path="/register" element={<Register />} />
+          </Route>
+          <Route element={<AuthRequire />}>
+            <Route element={<Layout />}>
+              <Route path="/" element={<Home />} />
+              <Route path="/:username/followers" element={<Followers />} />
+              <Route path="/:username/following" element={<Following />} />
+              <Route path="/:username" element={<Profile />} />
+            </Route>
+          </Route>
+        </Routes>
       </div>
     </div>
   );

@@ -18,6 +18,7 @@ function Login() {
       email,
       password,
     });
+    console.log("Clg de getToken", response.data);
     const user = response.data;
     dispatch(login(user));
     navigate(`/`);
