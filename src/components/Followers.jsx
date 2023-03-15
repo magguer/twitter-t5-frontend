@@ -1,72 +1,14 @@
-import { useState, useEffect } from "react";
-import { useSelector } from "react-redux";
-import axios from "axios";
 import SmallUser from "../partials/SmallUser";
+import { useParams } from "react-router-dom";
 
-function Followers() {
-  const [userFollowers, setUserFollowers] = useState([]);
-
-  const user = useSelector((state) => state.user);
-  useEffect(() => {
-    const getFollowers = async () => {
-      const response = await axios.get(
-        `http://localhost:8000/usuarios/${user.userName}/followers`
-      );
-      console.log(response);
-      setUserFollowers(response.data.users);
-    };
-    getFollowers();
-  }, []); // eslint-disable-line
-
+function Followers({ userFollowers }) {
   return (
     <>
-      <div className="col-10 row d-flex justify-content-center">
-        <div className="col-10 col-lg-7 p-0">
-          <div className="px-3 pt-3">
-            {/* <!--           Flecha Atrás --> */}
-            <div className="d-flex align-items-center mt-4">
-              <a
-                className="text-decoration-none text-black fs-4"
-                href="/usuarios/<%= userFollowers.username %>"
-              >
-                🡠
-              </a>
-              <div className="d-flex align-items-start flex-column ms-4">
-                <h5 className="mb-0">
-                  {/* <%= userFollowers.firstname %> <%= userFollowers.lastname %> */}
-                </h5>
-                <small>{/* @<%= userFollowers.username %> */}</small>
-              </div>
-            </div>
-          </div>
-          <div className="mt-3 d-flex justify-content-around">
-            <div>
-              <p className="fs-5 text-black fw-semibold text-decoration-none">
-                Followers
-              </p>
-              <div
-                style={{
-                  background: "#1d9bf0",
-                  width: "100%",
-                  height: "4px",
-                  marginTop: "8px",
-                }}
-              ></div>
-            </div>
-            <div>
-              <a
-                href="following"
-                className="fs-5 text-black fw-semibold text-decoration-none"
-              >
-                Following
-              </a>
-            </div>
-          </div>
-          <div className="col-10 d-flex flex-column border-top pt-4">
-            {userFollowers.map((user) => {
-              return <SmallUser key={user.id} smallUser={user} />;
-            })}
-          </div>
+      <div className="row d-flex justify-content-center">
+        <div className="col-10 d-flex flex-column border-top pt-4">
+          {userFollowers.users.map((user) => {
+            return <SmallUser key={user.id} smallUser={user} />;
+          })}
         </div>
       </div>
     </>

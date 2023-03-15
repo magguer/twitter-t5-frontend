@@ -17,7 +17,6 @@ function Home() {
 
         url: "http://localhost:8000/",
       });
-      console.log(response);
       setTweets(response.data.allTweets);
     };
     getHome();
@@ -25,6 +24,7 @@ function Home() {
 
   return (
     <div>
+      <h2>HOME</h2>
       {tweets.map((tweet) => (
         <h2 key={tweet.id}>{tweet.text}</h2>
       ))}

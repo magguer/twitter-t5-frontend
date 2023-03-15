@@ -13,6 +13,8 @@ const userSlice = createSlice({
       state.userFirstname = action.payload.userFirstName;
       state.userLastname = action.payload.userLastName;
       state.userImage = action.payload.userImage;
+      state.userFollowers = action.payload.userFollowers
+      state.userFollowing = action.payload.userFollowing
     },
     logOut(state, action) {
       return (state = {});

@@ -1,15 +1,18 @@
 import React from "react";
+import { Outlet } from "react-router-dom";
 import Header from "../partials/Header";
 import MoreInfo from "../partials/MoreInfo";
 
-function Layout({ children }) {
+function Layout() {
   return (
-    <div className="d-flex">
-      <div>
+    <div className="row m-0">
+      <div className="col-2">
         <Header />
       </div>
-      <div>{children}</div>
-      <div>
+      <main className="col-7">
+        <Outlet />
+      </main>
+      <div className="col-3">
         <MoreInfo />
       </div>
     </div>
