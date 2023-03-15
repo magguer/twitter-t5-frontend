@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import { logOut } from "../redux/userSlice";
@@ -6,12 +6,35 @@ import { logOut } from "../redux/userSlice";
 function Header() {
   const user = useSelector((state) => state.user);
   const dispatch = useDispatch();
+  const [showOptions, setShowOptions] = useState(false);
 
   return (
-    <>
+    <div style={{ position: "relative" }}>
+      {showOptions && (
+        <div
+          style={{
+            position: "absolute",
+            zIndex: "100",
+            left: "15rem",
+            bottom: "10px",
+          }}
+        >
+          <button
+            onClick={() => dispatch(logOut())}
+            className="d-flex justify-content-center"
+            style={{ backgroundColor: "#f01d1d00", border: "none" }}
+          >
+            <img
+              style={{ width: "50px", backgroundBlendMode: "multiply" }}
+              src="https://i.ibb.co/9HjCnvx/removal-ai-tmp-641209035fdb3.png"
+              alt="user_icon"
+            />
+          </button>
+        </div>
+      )}
       <div
-        className="sticky-top d-grid justify-content-end py-3 pt-4"
-        style={{ height: "100vh" }}
+        className="absolute sticky-top d-grid justify-content-end py-3 pt-4 bg-white"
+        style={{ height: "100vh", zIndex: "500" }}
       >
         {/*<!-- Nav top --> */}
         <div className="d-flex flex-column justify-content-between align-items-end">
@@ -56,19 +79,17 @@ function Header() {
         <div className="d-flex flex-column justify-content-end">
           {/*<!--     LogOut Button -->*/}
           <button
-            onClick={() => dispatch(logOut())}
+            onClick={() => setShowOptions(!showOptions)}
             className="d-flex justify-content-center"
             style={{ backgroundColor: "#f01d1d00", border: "none" }}
           >
-            <img
-              style={{ width: "50px" }}
-              src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQX5hU53Jw6nWu4UJ6H1tZXA9vqG7lzKzOz_QEdcRW-CKxMu81kF87iOI4TYZ5ymzkFwEo&usqp=CAU"
-              alt="user_icon"
-            />
+            <div className="text-primary" style={{ fontSize: "4rem" }}>
+              ...
+            </div>
           </button>
         </div>
       </div>
-    </>
+    </div>
   );
 }
 

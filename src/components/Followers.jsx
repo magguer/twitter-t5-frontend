@@ -6,8 +6,8 @@ function Followers({ userFollowers }) {
     <>
       <div className="row d-flex justify-content-center">
         <div className="col-10 d-flex flex-column border-top pt-4">
-          {userFollowers.users.map((user) => {
-            return <SmallUser key={user.id} smallUser={user} />;
+          {userFollowers.usersFollowers.map((user, i) => {
+            return <SmallUser key={i} smallUser={user} />;
           })}
         </div>
       </div>
