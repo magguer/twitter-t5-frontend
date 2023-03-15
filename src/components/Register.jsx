@@ -12,18 +12,22 @@ function Register() {
 
   const navigate = useNavigate();
 
-  const createUser = async (e) => {
-    e.preventDefault();
-    const response = await axios.post("http://localhost:8000/user", {
-      firstname,
-      lastname,
-      username,
-      email,
-      img,
-      password,
+  const createUser = async () => {
+    const response = await axios({
+      method: "POST",
+      url: "http://localhost:8000/user",
+      data: {
+        firstname,
+        lastname,
+        username,
+        email,
+        img,
+        password,
+      },
+      headers: { "Content-Type": "multipart/form-data" },
     });
     console.log(response);
-    navigate("/");
+    navigate("/login");
   };
 
   return (

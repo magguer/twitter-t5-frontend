@@ -1,9 +1,11 @@
 import React from "react";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
+import { logOut } from "../redux/userSlice";
 
 function Header() {
   const user = useSelector((state) => state.user);
+  const dispatch = useDispatch();
 
   return (
     <>
@@ -54,18 +56,17 @@ function Header() {
           {/*<!--   Nav logout --> */}
           <div className="d-flex flex-column justify-content-end">
             {/*<!--     LogOut Button -->*/}
-            <form action="/logout" method="post">
-              <button
-                className="d-flex justify-content-center"
-                style={{ backgroundColor: "#f01d1d00", border: "none" }}
-              >
-                <img
-                  style={{ width: "50px" }}
-                  src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQX5hU53Jw6nWu4UJ6H1tZXA9vqG7lzKzOz_QEdcRW-CKxMu81kF87iOI4TYZ5ymzkFwEo&usqp=CAU"
-                  alt="user_icon"
-                />
-              </button>
-            </form>
+            <button
+              onClick={() => dispatch(logOut())}
+              className="d-flex justify-content-center"
+              style={{ backgroundColor: "#f01d1d00", border: "none" }}
+            >
+              <img
+                style={{ width: "50px" }}
+                src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQX5hU53Jw6nWu4UJ6H1tZXA9vqG7lzKzOz_QEdcRW-CKxMu81kF87iOI4TYZ5ymzkFwEo&usqp=CAU"
+                alt="user_icon"
+              />
+            </button>
           </div>
         </div>
       </div>
