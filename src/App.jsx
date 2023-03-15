@@ -6,8 +6,6 @@ import Followers from "./components/Followers";
 import Following from "./components/Following";
 import Profile from "./components/Profile";
 import Register from "./components/Register";
-import Header from "./partials/Header";
-import MoreInfo from "./partials/MoreInfo";
 import AuthRequire from "./hooks/AuthRequire";
 import NoAuthRequire from "./hooks/NoAuthRequire";
 import Layout from "./layout/Layout";

@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
-
+import SmallUser from "../partials/SmallUser";
 import axios from "axios";
 
 function Following() {
@@ -64,21 +64,7 @@ function Following() {
           </div>
           <div className="col-10 d-flex flex-column border-top pt-4">
             {userFollowing.map((user) => {
-              return (
-                <div className="d-flex">
-                  <img
-                    src={user.image}
-                    className="rounded rounded-pill "
-                    alt="avatar"
-                    style={{ width: "3rem" }}
-                  />
-                  <strong>
-                    <p className="ms-3">
-                      {user.firstname} {user.lastname}
-                    </p>
-                  </strong>
-                </div>
-              );
+              return <SmallUser key={user.id} smallUser={user} />;
             })}
           </div>
         </div>
