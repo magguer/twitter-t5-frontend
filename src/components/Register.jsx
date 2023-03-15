@@ -1,29 +1,48 @@
 import axios from "axios";
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { login } from "../redux/userSlice";
 
 function Register() {
   const [firstname, setFirstName] = useState("");
   const [lastname, setLastName] = useState("");
   const [username, setUserName] = useState("");
   const [email, setEmail] = useState("");
-  const [img, setImg] = useState("");
+  const [image, setImage] = useState("");
   const [password, setPassword] = useState("");
 
+  const dispatch = useDispatch();
   const navigate = useNavigate();
 
   const createUser = async (e) => {
     e.preventDefault();
-    const response = await axios.post("http://localhost:8000/user", {
-      firstname,
-      lastname,
-      username,
-      email,
-      img,
-      password,
+
+    const formData = new FormData();
+    formData.append("firstname", firstname);
+    formData.append("lastname", lastname);
+    formData.append("image", image);
+    formData.append("email", email);
+    formData.append("username", username);
+    formData.append("password", password);
+
+    const response = await axios({
+      method: "POST",
+      url: "http://localhost:8000/user",
+      data: formData,
+      headers: { "Content-Type": "multipart/form-data" },
     });
-    console.log(response);
-    navigate("/");
+    if (response.status !== 201) {
+      console.log("Algo salió mal.");
+    } else {
+      const response = await axios.post("http://localhost:8000/token", {
+        email,
+        password,
+      });
+      const user = response.data;
+      dispatch(login(user));
+      navigate(`/`);
+    }
   };
 
   return (
@@ -108,7 +127,8 @@ function Register() {
 
                 <div className="mb-3">
                   <input
-                    onChange={(e) => setImg(e.target.value)}
+                    onChange={(e) => setImage(e.target.files[0])}
+                    multiple
                     className="form-control"
                     name="image"
                     id="image"

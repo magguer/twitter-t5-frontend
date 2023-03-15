@@ -5,6 +5,7 @@ import axios from "axios";
 function Home() {
   const [tweets, setTweets] = useState([]);
   const user = useSelector((state) => state.user);
+  // console.log(user);
 
   useEffect(() => {
     const getHome = async () => {
@@ -16,11 +17,11 @@ function Home() {
 
         url: "http://localhost:8000/",
       });
-      console.log(response);
       setTweets(response.data.allTweets);
     };
     getHome();
   }, []);
+
   return (
     <div>
       <h5 class="my-4">Home</h5>
@@ -95,6 +96,10 @@ function Home() {
           <i class="bi bi-heart"></i>;<i class="bi bi-trash"></i>
         </div>
       </div>
+      <h2>HOME</h2>
+      {tweets.map((tweet) => (
+        <h2 key={tweet.id}>{tweet.text}</h2>
+      ))}
     </div>
   );
 }
