@@ -15,15 +15,11 @@ function Followers() {
       setUserFollowers(response.data.users);
     };
     getFollowers();
-  }, []);
+  }, []); // eslint-disable-line
 
   return (
     <>
-      <div className="row">
-        <div className="col-2 border p-0">
-          {/* <%- include("../partials/navbar") %> */}
-        </div>
-        {/* <!--       Body --> */}
+      <div className="col-10 row d-flex justify-content-center">
         <div className="col-10 col-lg-7 p-0">
           <div className="px-3 pt-3">
             {/* <!--           Flecha Atrás --> */}
@@ -44,9 +40,9 @@ function Followers() {
           </div>
           <div className="mt-3 d-flex justify-content-around">
             <div>
-              <a className="fs-5 text-black fw-semibold text-decoration-none">
+              <p className="fs-5 text-black fw-semibold text-decoration-none">
                 Followers
-              </a>
+              </p>
               <div
                 style={{
                   background: "#1d9bf0",
@@ -65,19 +61,25 @@ function Followers() {
               </a>
             </div>
           </div>
-          <div className="d-flex flex-column border-top pt-4">
+          <div className="col-10 d-flex flex-column border-top pt-4">
             {userFollowers.map((user) => {
               return (
-                <div>
-                  <h2>{user.firstname}</h2>
+                <div className="d-flex">
+                  <img
+                    src={user.image}
+                    className="rounded rounded-pill "
+                    alt="avatar"
+                    style={{ width: "3rem" }}
+                  />
+                  <strong>
+                    <p className="ms-3">
+                      {user.firstname} {user.lastname}
+                    </p>
+                  </strong>
                 </div>
               );
             })}
           </div>
-        </div>
-        {/* <!--       More info --> */}
-        <div className="col-4 d-none d-lg-block col-lg-3 border p-0">
-          {/* <%- include("../partials/moreinfo", { usersInfo, globalUser }) %> */}
         </div>
       </div>
     </>

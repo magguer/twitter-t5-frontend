@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
+
 import axios from "axios";
 
 function Following() {
@@ -16,47 +16,34 @@ function Following() {
       setUserFollowing(response.data.users);
     };
     getFollowing();
-  }, []);
+  }, []); // eslint-disable-line
 
   return (
     <>
-      <div className="row">
-        {/* <!--       NavBar --> */}
-        <div className="col-2 border p-0">
-          {/* <%- include("../partials/navbar") %> */}
-        </div>
-        {/* <!--       Body --> */}
+      <div className="col-10 row d-flex justify-content-center">
         <div className="col-10 col-lg-7 p-0">
           <div className="px-3 pt-3">
             {/* <!--           Flecha Atrás --> */}
             <div className="d-flex align-items-center mt-4">
               <a
                 className="text-decoration-none text-black fs-4"
-                href="/usuarios/<%= userFollowing.username %>"
+                href="/usuarios/<%= userFollowers.username %>"
               >
                 🡠
               </a>
               <div className="d-flex align-items-start flex-column ms-4">
                 <h5 className="mb-0">
-                  {/* <%= userFollowing.firstname %> <%= userFollowing.lastname %> */}
+                  {/* <%= userFollowers.firstname %> <%= userFollowers.lastname %> */}
                 </h5>
-                <small>{/* @<%= userFollowing.username %> */}</small>
+                <small>{/* @<%= userFollowers.username %> */}</small>
               </div>
             </div>
           </div>
           <div className="mt-3 d-flex justify-content-around">
             <div>
-              <a
-                href="followers"
-                className="fs-5 text-black fw-semibold text-decoration-none"
-              >
+              <p className="fs-5 text-black fw-semibold text-decoration-none">
                 Followers
-              </a>
-            </div>
-            <div>
-              <a className="fs-5 text-black fw-semibold text-decoration-none">
-                Following
-              </a>
+              </p>
               <div
                 style={{
                   background: "#1d9bf0",
@@ -66,27 +53,34 @@ function Following() {
                 }}
               ></div>
             </div>
+            <div>
+              <a
+                href="following"
+                className="fs-5 text-black fw-semibold text-decoration-none"
+              >
+                Following
+              </a>
+            </div>
           </div>
-          <div className="d-flex flex-column border-top pt-4">
-            {/* <!-- TO DO: Hacer que entre a el arreglo following dentro del Modelo User --> */}
+          <div className="col-10 d-flex flex-column border-top pt-4">
             {userFollowing.map((user) => {
               return (
-                <div>
-                  <h2>{user.firstname}</h2>
+                <div className="d-flex">
+                  <img
+                    src={user.image}
+                    className="rounded rounded-pill "
+                    alt="avatar"
+                    style={{ width: "3rem" }}
+                  />
+                  <strong>
+                    <p className="ms-3">
+                      {user.firstname} {user.lastname}
+                    </p>
+                  </strong>
                 </div>
               );
             })}
-            {/* <% for (const smallUser of users){%>
-          <!-- comment -->
-          <!-- comment -->
-          <%- include("../partials/smallUser", { smallUser, globalUser }) %>
-          <!-- comment -->
-          <%}%> */}
           </div>
-        </div>
-        {/* <!--       More info --> */}
-        <div className="col-4 d-none d-lg-block col-lg-3 border p-0">
-          {/* <%- include("../partials/moreinfo", { usersInfo, globalUser }) %> */}
         </div>
       </div>
     </>
