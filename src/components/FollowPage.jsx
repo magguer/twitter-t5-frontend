@@ -1,12 +1,14 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
 import HeaderFollow from "../partials/HeaderFollow";
 import Followers from "./Followers";
 import Following from "./Following";
 
 function FollowPage() {
   const userProfile = useParams();
+  const reset = useSelector((state) => state.reset);
 
   const [userFollowers, setUserFollowers] = useState(null);
   const [userFollowing, setUserFollowing] = useState(null);
@@ -22,7 +24,7 @@ function FollowPage() {
       setUserFollowers(response.data);
     };
     getFollowers();
-  }, []); // eslint-disable-line
+  }, [reset]); // eslint-disable-line
 
   //Llamado de Followings
   useEffect(() => {
@@ -33,7 +35,7 @@ function FollowPage() {
       setUserFollowing(response.data);
     };
     getFollowing();
-  }, []); // eslint-disable-line
+  }, [reset]); // eslint-disable-line
 
   return (
     <>
@@ -43,7 +45,7 @@ function FollowPage() {
             <HeaderFollow
               setShowFollowers={setShowFollowers}
               showFollowers={showFollowers}
-              userFollowing={userFollowing.userFollowing}
+              userFollowing={userFollowing.userParamsFollowing}
             />
           </div>
           {showFollowers ? (

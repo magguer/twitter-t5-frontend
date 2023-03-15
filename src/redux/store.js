@@ -1,5 +1,6 @@
 import { configureStore } from "@reduxjs/toolkit";
 import userReducer from "./userSlice";
+import resetReducer from "./resetSlice";
 import { persistReducer } from 'redux-persist'
 import storage from 'redux-persist/lib/storage'
 
@@ -12,7 +13,8 @@ const persistedReducer = persistReducer(persistConfig, userReducer)
 
 const store = configureStore({
   reducer: {
-    user: persistedReducer
+    user: persistedReducer,
+    reset: resetReducer
   }
 })
 
