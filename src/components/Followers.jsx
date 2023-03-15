@@ -1,4 +1,22 @@
+import { useState, useEffect } from "react";
+import { useSelector } from "react-redux";
+import axios from "axios";
+
 function Followers() {
+  const [userFollowers, setUserFollowers] = useState([]);
+
+  const user = useSelector((state) => state.user);
+  useEffect(() => {
+    const getFollowers = async () => {
+      const response = await axios.get(
+        `http://localhost:8000/usuarios/${user.userName}/followers`
+      );
+      console.log(response);
+      setUserFollowers(response.data.users);
+    };
+    getFollowers();
+  }, []);
+
   return (
     <>
       <div className="row">
@@ -48,11 +66,13 @@ function Followers() {
             </div>
           </div>
           <div className="d-flex flex-column border-top pt-4">
-            {/* <% for (const smallUser of users) { %>
-          <!-- comment -->
-          <%- include("../partials/smallUser", { smallUser, globalUser }) %>
-          <!-- comment -->
-          <%}%> */}
+            {userFollowers.map((user) => {
+              return (
+                <div>
+                  <h2>{user.firstname}</h2>
+                </div>
+              );
+            })}
           </div>
         </div>
         {/* <!--       More info --> */}
