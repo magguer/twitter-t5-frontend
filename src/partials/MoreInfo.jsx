@@ -15,7 +15,7 @@ function MoreInfo() {
         headers: {
           Authorization: `Bearer ${user.userToken}`,
         },
-        url: `http://localhost:8000/usuarios/random`,
+        url: `${process.env.REACT_APP_API_URL}/usuarios/random`,
       });
       setUsers(response.data);
     };
@@ -23,7 +23,7 @@ function MoreInfo() {
   }, []); // eslint-disable-line
 
   return (
-    <>
+    <div className="sticky-top">
       <div className="sticky-top d-flex flex-column p-3">
         {/* What's happening */}
         <div className="d-flex flex-column">
@@ -101,7 +101,7 @@ function MoreInfo() {
 
           {/* Who to Follow */}
           <div style={{ backgroundColor: "#ededed" }} className="rounded-3">
-            <div className="pt-3 px-3">
+            <div className="pt-2 px-3">
               <h3 className="fs-5 fw-bold">Who to follow</h3>
             </div>
             {users.map((user, i) => {
@@ -110,7 +110,7 @@ function MoreInfo() {
           </div>
         </div>
       </div>
-    </>
+    </div>
   );
 }
 

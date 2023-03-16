@@ -28,17 +28,20 @@ function Register() {
 
     const response = await axios({
       method: "POST",
-      url: "http://localhost:8000/user",
+      url: `${process.env.REACT_APP_API_URL}/user`,
       data: formData,
       headers: { "Content-Type": "multipart/form-data" },
     });
     if (response.status !== 201) {
       console.log("Algo salió mal.");
     } else {
-      const response = await axios.post("http://localhost:8000/token", {
-        email,
-        password,
-      });
+      const response = await axios.post(
+        `${process.env.REACT_APP_API_URL}/token`,
+        {
+          email,
+          password,
+        }
+      );
       const user = response.data;
       dispatch(login(user));
       navigate(`/`);
