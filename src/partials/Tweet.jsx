@@ -5,6 +5,7 @@ import { actualize } from "../redux/resetSlice";
 function Tweet({ tweet }) {
   const dispatch = useDispatch();
   const user = useSelector((state) => state.user);
+
   const tweetLiked = tweet.likes.some(
     (like) => like.username === user.userName
   );
@@ -95,18 +96,20 @@ function Tweet({ tweet }) {
                   {tweet.likes.length}
                 </h2>
               </button>
-              <button
-                type="submit"
-                className="border border-white bg-white m-0 p-0 d-flex align-items-center"
-                onClick={handleDeleteTweet}
-              >
-                <img
-                  src="https://cdn-icons-png.flaticon.com/512/6861/6861362.png"
-                  className="img-fluid object-fit"
-                  style={{ width: "1rem" }}
-                  alt="trash-can"
-                />
-              </button>
+              {user.userName === tweet.user.username && (
+                <button
+                  type="submit"
+                  className="border border-white bg-white m-0 p-0 d-flex align-items-center"
+                  onClick={handleDeleteTweet}
+                >
+                  <img
+                    src="https://cdn-icons-png.flaticon.com/512/6861/6861362.png"
+                    className="img-fluid object-fit"
+                    style={{ width: "1rem" }}
+                    alt="trash-can"
+                  />
+                </button>
+              )}
             </div>
           </div>
         </div>
