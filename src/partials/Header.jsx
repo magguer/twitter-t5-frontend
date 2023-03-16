@@ -9,7 +9,7 @@ function Header() {
   const [showOptions, setShowOptions] = useState(false);
 
   return (
-    <div style={{ position: "relative" }}>
+    <div className="sticky-top">
       {showOptions && (
         <div
           style={{

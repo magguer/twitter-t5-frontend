@@ -1,12 +1,16 @@
 import { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import axios from "axios";
+import { actualize } from "../redux/resetSlice";
 
 function Home() {
   const [tweets, setTweets] = useState([]);
+  const dispatch = useDispatch();
   const user = useSelector((state) => state.user);
-  // console.log(user);
+  const reset = useSelector((state) => state.reset);
+  const [tweet, setTweet] = useState("");
 
+  //Get de tweets
   useEffect(() => {
     const getHome = async () => {
       const response = await axios({
@@ -14,13 +18,26 @@ function Home() {
           Authorization: `Bearer ${user.userToken}`,
         },
         method: "get",
-
         url: "http://localhost:8000/tweets/",
       });
       setTweets(response.data.tweets);
     };
     getHome();
-  }, []);
+  }, [reset]);
+
+  // Post de tweet
+  const handleTweet = async (e) => {
+    dispatch(actualize());
+    e.preventDefault();
+    const response = await axios({
+      headers: {
+        Authorization: `Bearer ${user.userToken}`,
+      },
+      method: "POST",
+      url: "http://localhost:8000/tweets/",
+      data: { tweet: tweet },
+    });
+  };
 
   return (
     <div>
@@ -37,7 +54,7 @@ function Home() {
               }}
               className="figure-img img-fluid align-self-center"
               alt="img"
-              src={"https://www.w3schools.com/howto/img_avatar.png"}
+              src={user.userImage}
             />
             <div className="w-100">
               <textarea
@@ -45,7 +62,9 @@ function Home() {
                 placeholder="What's happening?"
                 name="newTweet"
                 id="newTweet"
-                style={{ height: "auto", width: "700px" }}
+                style={{ height: "100px" }}
+                value={tweet}
+                onChange={(e) => setTweet(e.target.value)}
               ></textarea>
             </div>
             <div className="d-flex justify-content-end my-3">
@@ -56,6 +75,7 @@ function Home() {
                   borderRadius: "45px",
                   backgroundColor: "#1d9bf0",
                 }}
+                onClick={handleTweet}
               >
                 Tweet
               </button>
@@ -66,39 +86,35 @@ function Home() {
 
       {/* A partir de aca para abajo hay que mandar el .map */}
       {/* Imagen del usuario */}
-      <div className="d-flex w-100 p-3 border-top border-succes border-opacity-50">
-        <img
-          style={{ width: "2.5rem" }}
-          className="figure-img img-fluid rounded-pill align-self-center"
-          alt="img"
-          src={"https://www.w3schools.com/howto/img_avatar.png"}
-        />
-
-        <div className="d-flex flex-column w-100"></div>
-        {/* a partir de aca */}
-      </div>
-      <div class="d-flex flex-column w-100">
-        <div class="d-flex align-items-center gap-1">{/* LINK  usuario */}</div>
-        <p className="text-decoration-none text-black fw-semibold mb-0 p-0">
-          NOMBRE DE USUARIO
-        </p>
-        <small
-          className="p-0 m-0"
-          style={{ fontSize: "0.8rem", color: "#969696" }}
-        >
-          @userNAme
-        </small>
-        <p>
-          Lorem ipsum dolor sit amet consectetur, adipisicing elit. Doloribus
-          neque excepturi quam voluptas quis deserunt?
-        </p>
-        <div>
-          <i class="bi bi-heart"></i>;<i class="bi bi-trash"></i>
-        </div>
-      </div>
-      <h2>HOME</h2>
       {tweets.map((tweet) => (
-        <h2 key={tweet.id}>{tweet.text}</h2>
+        <div key={tweet.id}>
+          <div className="d-flex w-100 p-3 border-top border-succes border-opacity-50">
+            <img
+              style={{ width: "2.5rem" }}
+              className="figure-img img-fluid rounded-pill align-self-center"
+              alt="img"
+              src={tweet.user.image}
+            />
+
+            <div className="d-flex flex-column w-100"></div>
+            {/* a partir de aca */}
+          </div>
+          <div class="d-flex flex-column w-100">
+            <div class="d-flex align-items-center gap-1">
+              {/* LINK  usuario */}
+            </div>
+            <p className="text-decoration-none text-black fw-semibold mb-0 p-0">
+              {tweet.user.firstname} {tweet.user.lastname}
+            </p>
+            <small
+              className="p-0 m-0"
+              style={{ fontSize: "0.8rem", color: "#969696" }}
+            >
+              @{tweet.user.username}
+            </small>
+            <p>{tweet.text}</p>
+          </div>
+        </div>
       ))}
     </div>
   );
