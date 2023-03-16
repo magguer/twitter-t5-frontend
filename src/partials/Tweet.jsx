@@ -5,24 +5,19 @@ import { actualize } from "../redux/resetSlice";
 function Tweet({ tweet }) {
   const dispatch = useDispatch();
   const user = useSelector((state) => state.user);
-
   const tweetLiked = tweet.likes.some(
-    (like) => like.username === user.username
+    (like) => like.username === user.userName
   );
-  /*   const userLike = tweet.likes.some((userThatLiked) => userThatLiked.id
-        === user.id) 
 
-/*   console.log(tweet); */
   // Delete de tweet
-  const handleDeleteTweet = async (e) => {
+  const handleDeleteTweet = async () => {
     dispatch(actualize());
-    e.preventDefault();
     await axios({
       headers: {
         Authorization: `Bearer ${user.userToken}`,
       },
       method: "DELETE",
-      url: `${process.env.REACT_APP_API_URL}/tweets/${tweet._id}`,
+      url: `http://localhost:8000/tweets/${tweet._id}`,
     });
   };
 
