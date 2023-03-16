@@ -10,8 +10,6 @@ function Home() {
   const reset = useSelector((state) => state.reset);
   const [tweet, setTweet] = useState("");
 
-  console.log(user);
-
   //Get de tweets
   useEffect(() => {
     const getHome = async () => {
@@ -20,7 +18,6 @@ function Home() {
           Authorization: `Bearer ${user.userToken}`,
         },
         method: "get",
-
         url: "http://localhost:8000/tweets/",
       });
       setTweets(response.data.tweets);
@@ -37,7 +34,6 @@ function Home() {
         Authorization: `Bearer ${user.userToken}`,
       },
       method: "POST",
-
       url: "http://localhost:8000/tweets/",
       data: { tweet: tweet },
     });
