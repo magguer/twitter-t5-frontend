@@ -17,7 +17,6 @@ function MoreInfo() {
         },
         url: `http://localhost:8000/usuarios/random`,
       });
-      console.log(response.data);
       setUsers(response.data);
     };
     getUser();

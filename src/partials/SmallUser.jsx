@@ -11,7 +11,7 @@ function SmallUser({ smallUser }) {
 
   const [usersStateFollowing, setUsersStateFollowing] = useState([]);
 
-  useEffect(() => {
+  /*   useEffect(() => {
     const getFollowing = async () => {
       const response = await axios.get(
         `http://localhost:8000/usuarios/${user.userName}/following`
@@ -19,7 +19,7 @@ function SmallUser({ smallUser }) {
       setUsersStateFollowing(response.data.usersFollowing);
     };
     getFollowing();
-  }, [reset]); // eslint-disable-line
+  }, [reset]); // eslint-disable-line */
 
   const userFollowing = usersStateFollowing.some(
     (u) => u._id === smallUser._id
