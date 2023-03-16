@@ -16,7 +16,7 @@ function Tweet({ tweet }) {
         Authorization: `Bearer ${user.userToken}`,
       },
       method: "DELETE",
-      url: `http://localhost:8000/tweets/${tweet._id}`,
+      url: `${process.env.REACT_APP_API_URL}/tweets/${tweet._id}`,
     });
   };
   return (

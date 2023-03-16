@@ -25,7 +25,7 @@ function FollowPage() {
         },
         method: "get",
 
-        url: `http://localhost:8000/usuarios/${userProfile.username}/followers`,
+        url: `${process.env.REACT_APP_API_URL}/usuarios/${userProfile.username}/followers`,
       });
       setUserFollowers(response.data);
     };
@@ -41,7 +41,7 @@ function FollowPage() {
         },
         method: "get",
 
-        url: `http://localhost:8000/usuarios/${userProfile.username}/following`,
+        url: `${process.env.REACT_APP_API_URL}/usuarios/${userProfile.username}/following`,
       });
       setUserFollowing(response.data);
     };

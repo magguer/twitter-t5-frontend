@@ -19,7 +19,7 @@ function Home() {
           Authorization: `Bearer ${user.userToken}`,
         },
         method: "get",
-        url: "http://localhost:8000/tweets/",
+        url: `${process.env.REACT_APP_API_URL}/tweets/`,
       });
       setTweets(response.data.tweets);
     };
@@ -35,7 +35,7 @@ function Home() {
         Authorization: `Bearer ${user.userToken}`,
       },
       method: "POST",
-      url: "http://localhost:8000/tweets/",
+      url: "${process.env.REACT_APP_API_URL}/tweets/",
       data: { tweet: tweet },
     });
   };

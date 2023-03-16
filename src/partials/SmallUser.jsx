@@ -7,7 +7,6 @@ import { follow, unfollow } from "../redux/userSlice";
 
 function SmallUser({ smallUser }) {
   const user = useSelector((state) => state.user);
-  const reset = useSelector((state) => state.reset);
   const dispatch = useDispatch();
 
   const userFollowing = user.userFollowing.some((u) => u._id === smallUser._id);
@@ -21,7 +20,7 @@ function SmallUser({ smallUser }) {
         Authorization: `Bearer ${user.userToken}`,
       },
       method: "patch",
-      url: `http://localhost:8000/usuarios/${smallUser._id}/follow`,
+      url: `${process.env.REACT_APP_API_URL}/usuarios/${smallUser._id}/follow`,
     });
   };
 
@@ -34,7 +33,7 @@ function SmallUser({ smallUser }) {
         Authorization: `Bearer ${user.userToken}`,
       },
       method: "patch",
-      url: `http://localhost:8000/usuarios/${smallUser._id}/unfollow`,
+      url: `${process.env.REACT_APP_API_URL}/usuarios/${smallUser._id}/unfollow`,
     });
   };
 
@@ -45,21 +44,16 @@ function SmallUser({ smallUser }) {
         <div className="d-flex align-items-center gap-3 w-100">
           {/* Imagen Usuario */}
           <Link to={`/${smallUser.username}`}>
-            {smallUser.image.includes("http") ? (
-              <img
-                style={{ width: "2.5rem" }}
-                className="figure-img img-fluid rounded-pill align-self-center"
-                alt="image"
-                src={smallUser.image}
-              />
-            ) : (
-              <img
-                style={{ width: "2.5rem" }}
-                className="figure-img img-fluid rounded-pill align-self-center"
-                alt="image"
-                src={`/img/${smallUser.image}`}
-              />
-            )}
+            <img
+              style={{ width: "2.5rem" }}
+              className="figure-img img-fluid rounded-pill align-self-center"
+              alt="image"
+              src={
+                smallUser.image.includes("http")
+                  ? smallUser.image
+                  : `${process.env.REACT_APP_API_URL}/img/${smallUser.image}`
+              }
+            />
           </Link>
           {/* Desc. Usuario */}
           <div>

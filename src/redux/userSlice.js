@@ -1,6 +1,6 @@
 import { createSlice, current } from "@reduxjs/toolkit";
 
-const initialState = {};
+const initialState = null;
 
 const userSlice = createSlice({
   name: "user",
@@ -17,7 +17,6 @@ const userSlice = createSlice({
       state.userFollowers = action.payload.userFollowers
       state.userFollowing = action.payload.userFollowing
       state.userTweets = action.payload.userTweets
-      console.log(current(state));
     },
     follow(state, action) {
       state.userFollowing.push(action.payload.smallUser)
