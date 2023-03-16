@@ -19,6 +19,13 @@ const userSlice = createSlice({
       state.userTweets = action.payload.userTweets
       console.log(current(state));
     },
+    follow(state, action) {
+      state.userFollowing.push(action.payload.smallUser)
+    },
+    unfollow(state, action) {
+      const following = state.userFollowing.filter((user) => user.username !== action.payload.username)
+      return { ...state, userFollowing: following }
+    },
     logOut(state, action) {
       return (state = {});
 
@@ -26,5 +33,5 @@ const userSlice = createSlice({
   },
 });
 
-export const { login, logOut } = userSlice.actions;
+export const { login, logOut, follow, unfollow } = userSlice.actions;
 export default userSlice.reducer;

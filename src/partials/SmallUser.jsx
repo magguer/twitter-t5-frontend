@@ -3,48 +3,37 @@ import { Link } from "react-router-dom";
 import axios from "axios";
 import { useSelector, useDispatch } from "react-redux";
 import { actualize } from "../redux/resetSlice";
+import { follow, unfollow } from "../redux/userSlice";
 
 function SmallUser({ smallUser }) {
   const user = useSelector((state) => state.user);
   const reset = useSelector((state) => state.reset);
   const dispatch = useDispatch();
 
-  const [usersStateFollowing, setUsersStateFollowing] = useState([]);
-
-  /*   useEffect(() => {
-    const getFollowing = async () => {
-      const response = await axios.get(
-        `http://localhost:8000/usuarios/${user.userName}/following`
-      );
-      setUsersStateFollowing(response.data.usersFollowing);
-    };
-    getFollowing();
-  }, [reset]); // eslint-disable-line */
-
-  const userFollowing = usersStateFollowing.some(
-    (u) => u._id === smallUser._id
-  );
+  const userFollowing = user.userFollowing.some((u) => u._id === smallUser._id);
 
   //Llamado de Follow
   const getFollow = async () => {
+    dispatch(follow({ smallUser }));
     dispatch(actualize());
     await axios({
       headers: {
         Authorization: `Bearer ${user.userToken}`,
       },
-      method: "put",
+      method: "patch",
       url: `http://localhost:8000/usuarios/${smallUser._id}/follow`,
     });
   };
 
   // Llamado de Unfollow
   const getUnFollow = async () => {
+    dispatch(unfollow(smallUser));
     dispatch(actualize());
     await axios({
       headers: {
         Authorization: `Bearer ${user.userToken}`,
       },
-      method: "put",
+      method: "patch",
       url: `http://localhost:8000/usuarios/${smallUser._id}/unfollow`,
     });
   };
@@ -55,7 +44,7 @@ function SmallUser({ smallUser }) {
         {/* Info Usuario */}
         <div className="d-flex align-items-center gap-3 w-100">
           {/* Imagen Usuario */}
-          <Link to={`/:username/${smallUser.username}`}>
+          <Link to={`/${smallUser.username}`}>
             {smallUser.image.includes("http") ? (
               <img
                 style={{ width: "2.5rem" }}
@@ -74,9 +63,10 @@ function SmallUser({ smallUser }) {
           </Link>
           {/* Desc. Usuario */}
           <div>
-            <Link className="text-decoration-none text-black">
-              {" "}
-              {/* to={`/usuarios/${smallUser.username}`} */}
+            <Link
+              to={`/${smallUser.username}`}
+              className="text-decoration-none text-black"
+            >
               <h6 className="mb-0 p-0">
                 {smallUser.firstname} {smallUser.lastname}
               </h6>
