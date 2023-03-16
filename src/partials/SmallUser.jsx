@@ -1,4 +1,3 @@
-import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import { useSelector, useDispatch } from "react-redux";
@@ -7,7 +6,6 @@ import { follow, unfollow } from "../redux/userSlice";
 
 function SmallUser({ smallUser }) {
   const user = useSelector((state) => state.user);
-  const reset = useSelector((state) => state.reset);
   const dispatch = useDispatch();
 
   const userFollowing = user.userFollowing.some((u) => u._id === smallUser._id);
