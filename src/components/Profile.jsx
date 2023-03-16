@@ -1,8 +1,8 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
-import { useParams } from "react-router-dom";
-import Tweet from "../partials/Tweet";
+import { Link, useParams } from "react-router-dom";
+import TweetProfile from "../partials/TweetProfile";
 
 function Profile() {
   const userNameProfile = useParams();
@@ -26,89 +26,94 @@ function Profile() {
   //console.log(userProfile);
 
   return (
-    <div class="p-0">
-      <div>
-        <div
-          style={{ backgroundColor: "#1d9bf0", height: "10rem", width: "100%" }}
-        ></div>
-      </div>
-      <div style={{ position: "relative", top: "-107px" }}>
-        {userProfile ? (
-          <img
-            className="rounded-pill position-relative ms-3 border border-5 border-white"
+    <>
+      {userProfile ? (
+        <div class="p-0 m-0">
+          {/* Div Banner Azul como el mar */}
+          <div
             style={{
-              height: "7rem",
-              width: "7rem",
-              top: "55px",
-              borderStyle: "solid",
-              borderColor: "white",
+              backgroundColor: "#1d9bf0",
+              height: "10rem",
+              width: "100%",
             }}
-            src={userProfile.image}
-            alt="img"
-          />
-        ) : null}
-      </div>
-      <div class="p-3">
-        <div className="justify-content-end">
-          <div className="d-flex justify-content-end mt-5">
-            <button
-              type="submit"
-              class="btn rounded-pill border"
-              style={{ backgroundColor: "#ffffff", color: "rgb(0, 0, 0)" }}
-            >
-              Your Profile
-            </button>
+          ></div>
+          {/* Div IMG */}
+          <div style={{ position: "relative", top: "-107px" }}>
+            <img
+              className="rounded-pill position-relative ms-3 border border-5 border-white"
+              style={{
+                height: "7rem",
+                width: "7rem",
+                top: "55px",
+                borderStyle: "solid",
+                borderColor: "white",
+              }}
+              src={userProfile.image}
+              alt="img"
+            />
           </div>
-          {userProfile ? (
+          {/* Div PADRE DE LOS TWEET */}
+          <div class="p-3">
+            {/* Buttom Profile */}
+            <div className="d-flex justify-content-end">
+              <Link
+                type="submit"
+                class="btn rounded-pill border"
+                style={{ backgroundColor: "#ffffff", color: "rgb(0, 0, 0)" }}
+              >
+                Your Profile
+              </Link>
+            </div>
+
             <h3 className="ms-3 mt-3 mb-0">
               {userProfile.firstname} {userProfile.lastname}
             </h3>
-          ) : null}
-          <div className="d-flex">
-            <div className="ms-3">
-              {userProfile ? (
+            {/* Div Tweet */}
+            <div className="d-flex">
+              <div className="ms-3">
                 <small style={{ color: "#647788", fontWeight: "400" }}>
                   {userProfile.username}
                 </small>
-              ) : null}
-            </div>
-            <div className="ms-auto d-flex align-items-center gap-3">
-              <div className="d-flex align-items-center gap-1">
-                {userProfile ? (
+              </div>
+              <div className="ms-auto d-flex align-items-center gap-3">
+                <div className="d-flex align-items-center gap-1">
                   <small style={{ fontWeight: "700", color: "#000000" }}>
                     {userProfile.followers.length}
                   </small>
-                ) : null}
-                <button
-                  className="text-decoration-none"
-                  href=""
-                  style={{ color: "#647788" }}
-                >
-                  Followers
-                </button>
 
-                {userProfile ? (
+                  <Link
+                    className="text-decoration-none"
+                    to={`http://localhost:3000/${userProfile.username}/follows`}
+                    style={{ color: "#647788" }}
+                  >
+                    Followers
+                  </Link>
+
                   <small style={{ fontWeight: "700", color: "#000000" }}>
                     {userProfile.following.length}
                   </small>
-                ) : null}
-                <button
-                  className="text-decoration-none"
-                  href=""
-                  style={{ color: "#647788" }}
-                >
-                  Following
-                </button>
+
+                  <Link
+                    className="text-decoration-none"
+                    to={`http://localhost:3000/${userProfile.username}/follows`}
+                    style={{ color: "#647788" }}
+                  >
+                    Following
+                  </Link>
+                </div>
               </div>
             </div>
-          </div>
 
-          {userProfile
-            ? userProfile.tweets.map((tweet) => <Tweet tweet={tweet} />)
-            : null}
+            {userProfile
+              ? userProfile.tweets.map((tweet) => (
+                  <TweetProfile tweet={tweet} userProfile={userProfile} />
+                ))
+              : null}
+          </div>
         </div>
-      </div>
-    </div>
+      ) : null}
+    </>
   );
 }
+
 export default Profile;
