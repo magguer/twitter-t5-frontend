@@ -24,7 +24,6 @@ function Home() {
         url: "http://localhost:8000/tweets/",
       });
       setTweets(response.data.tweets);
-      // console.log(response.data.tweets);
     };
     getHome();
   }, [reset]);
