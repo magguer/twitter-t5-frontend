@@ -19,7 +19,7 @@ function Home() {
           Authorization: `Bearer ${user.userToken}`,
         },
         method: "get",
-        url: `${process.env.REACT_APP_API_URL}/tweets/`,
+        url: `${process.env.REACT_APP_API_URL}/tweets`,
       });
       setTweets(response.data.tweets);
     };
@@ -28,35 +28,37 @@ function Home() {
 
   // Post de tweet
   const handleTweet = async (e) => {
-    dispatch(actualize());
-    e.preventDefault();
-    const response = await axios({
-      headers: {
-        Authorization: `Bearer ${user.userToken}`,
-      },
-      method: "POST",
-      url: "${process.env.REACT_APP_API_URL}/tweets/",
-      data: { tweet: tweet },
-    });
+    if (tweet !== "") {
+      dispatch(actualize());
+      e.preventDefault();
+      await axios({
+        headers: {
+          Authorization: `Bearer ${user.userToken}`,
+        },
+        method: "POST",
+        url: `${process.env.REACT_APP_API_URL}/tweets/`,
+        data: { tweet: tweet },
+      });
+    }
   };
 
   return (
     <div>
-      <h5 class="my-4">Home</h5>
-      <form>
-        <div className="d-flex">
-          <div className="me-3">
-            <img
-              style={{
-                width: "4rem",
-
-                objectFit: " cover",
-                borderRadius: "100%",
-              }}
-              className="figure-img img-fluid align-self-center"
-              alt="img"
-              src={user.userImage}
-            />
+      {/*       Tweet Form */}
+      <form className="m-3">
+        <h5 class="my-4">Home</h5>
+        <div className="me-3 d-flex gap-3">
+          <img
+            style={{ width: "4rem" }}
+            className="figure-img img-fluid rounded-pill align-self-start"
+            alt="image"
+            src={
+              user.userImage.includes("http")
+                ? user.userImage
+                : `${process.env.REACT_APP_API_URL}/img/${user.userImage}`
+            }
+          />
+          <div className="w-100 d-flex flex-column align-items-end gap-3">
             <div className="w-100">
               <textarea
                 className="form-control"
@@ -66,30 +68,29 @@ function Home() {
                 style={{ height: "100px" }}
                 value={tweet}
                 onChange={(e) => setTweet(e.target.value)}
-              ></textarea>
+              />
             </div>
-            <div className="d-flex justify-content-end my-3">
-              <button
-                className="btn text-light"
-                type="submit"
-                style={{
-                  borderRadius: "45px",
-                  backgroundColor: "#1d9bf0",
-                }}
-                onClick={handleTweet}
-              >
-                Tweet
-              </button>
-            </div>
+            <button
+              className="btn text-light"
+              type="submit"
+              style={{
+                borderRadius: "45px",
+                backgroundColor: "#1d9bf0",
+                height: "40px",
+              }}
+              onClick={handleTweet}
+            >
+              Tweet
+            </button>
           </div>
         </div>
       </form>
-
-      {/* A partir de aca para abajo hay que mandar el .map */}
-      {/* Imagen del usuario */}
-      {tweets.map((tweet) => (
-        <Tweet tweet={tweet} />
-      ))}
+      {/*       Tweets List */}
+      <div>
+        {tweets.map((tweet) => (
+          <Tweet tweet={tweet} />
+        ))}
+      </div>
     </div>
   );
 }

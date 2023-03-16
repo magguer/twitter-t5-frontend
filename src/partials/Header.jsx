@@ -79,7 +79,8 @@ function Header() {
         <div className="d-flex flex-column justify-content-end">
           {/*<!--     LogOut Button -->*/}
           <button
-            onClick={() => setShowOptions(!showOptions)}
+            /* onClick={() => setShowOptions(!showOptions)} */
+            onClick={() => dispatch(logOut())}
             className="d-flex justify-content-center"
             style={{ backgroundColor: "#f01d1d00", border: "none" }}
           >
