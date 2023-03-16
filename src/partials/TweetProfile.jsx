@@ -6,11 +6,14 @@ import { actualize } from "../redux/resetSlice";
 function TweetProfile({ userProfile, tweet }) {
   const dispatch = useDispatch();
   const user = useSelector((state) => state.user);
-  // Delete de tweet
-  const handleDeleteTweet = async (e) => {
-    dispatch(actualize());
-    e.preventDefault();
 
+  const tweetLiked = tweet.likes.some(
+    (like) => like.username === user.username
+  );
+
+  // Delete de tweet
+  const handleDeleteTweet = async () => {
+    dispatch(actualize());
     await axios({
       headers: {
         Authorization: `Bearer ${user.userToken}`,
@@ -18,6 +21,28 @@ function TweetProfile({ userProfile, tweet }) {
       method: "DELETE",
       url: `http://localhost:8000/tweets/${tweet._id}`,
     });
+  };
+
+  /* Like Tweet */
+  const likeTweet = async () => {
+    dispatch(actualize());
+    if (!tweetLiked) {
+      await axios({
+        headers: {
+          Authorization: `Bearer ${user.userToken}`,
+        },
+        method: "PATCH",
+        url: `http://localhost:8000/tweets/like/${tweet._id}`,
+      });
+    } else {
+      await axios({
+        headers: {
+          Authorization: `Bearer ${user.userToken}`,
+        },
+        method: "PATCH",
+        url: `http://localhost:8000/tweets/dislike/${tweet._id}`,
+      });
+    }
   };
 
   return (
@@ -30,8 +55,8 @@ function TweetProfile({ userProfile, tweet }) {
           src={userProfile.image}
         />
         {/* a partir de aca */}
-        <div class="d-flex flex-column w-100">
-          <div class="d-flex align-items-center gap-1">
+        <div className="d-flex flex-column w-100">
+          <div className="d-flex align-items-center gap-1">
             {/* LINK  usuario */}
           </div>
           <div className="">
@@ -49,17 +74,31 @@ function TweetProfile({ userProfile, tweet }) {
             <p className="mb-2">{tweet.text}</p>
             {/*  Botones */}
             <div className="d-flex w-100 justify-content-between">
+              {/*               Botón Like */}
               <button
+                onClick={likeTweet}
                 type="submit"
-                className="border border-white bg-white m-0 p-0 d-flex align-items-center"
+                className="gap-2 align-items-center border border-white bg-white m-0 p-0 d-flex align-items-center"
               >
                 <img
-                  src="https://svgur.com/i/qen.svg"
+                  src={
+                    tweetLiked
+                      ? "https://svgur.com/i/qen.svg"
+                      : "https://cdn-icons-png.flaticon.com/512/2961/2961957.png"
+                  }
                   className="img-fluid object-fit"
                   style={{ width: "1rem" }}
                   alt="heart-white"
                 />
+                <h2
+                  style={{ fontSize: "1rem", color: "#000000" }}
+                  className="m-0"
+                >
+                  {tweet.likes.length}
+                </h2>
               </button>
+
+              {/*               Botón Borrar Tweet */}
               <button
                 type="submit"
                 className="border border-white bg-white m-0 p-0 d-flex align-items-center"

@@ -8,6 +8,8 @@ function SmallUser({ smallUser }) {
   const user = useSelector((state) => state.user);
   const dispatch = useDispatch();
 
+  /*   const userFollowing = false; */
+
   const userFollowing = user.userFollowing.some((u) => u._id === smallUser._id);
 
   //Llamado de Follow

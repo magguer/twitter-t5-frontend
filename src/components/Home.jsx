@@ -46,7 +46,7 @@ function Home() {
     <div>
       {/*       Tweet Form */}
       <form className="m-3">
-        <h5 class="my-4">Home</h5>
+        <h5 className="my-4">Home</h5>
         <div className="me-3 d-flex gap-3">
           <img
             style={{ width: "4rem" }}
@@ -87,8 +87,8 @@ function Home() {
       </form>
       {/*       Tweets List */}
       <div>
-        {tweets.map((tweet) => (
-          <Tweet tweet={tweet} />
+        {tweets.map((tweet, i) => (
+          <Tweet key={i} tweet={tweet} />
         ))}
       </div>
     </div>

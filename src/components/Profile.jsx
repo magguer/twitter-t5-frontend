@@ -8,6 +8,7 @@ function Profile() {
   const userNameProfile = useParams();
   const [userProfile, setUserProfile] = useState(null);
   const user = useSelector((state) => state.user);
+  const reset = useSelector((state) => state.reset);
 
   useEffect(() => {
     const getProfile = async () => {
@@ -22,13 +23,13 @@ function Profile() {
       setUserProfile(response.data.userProfile);
     };
     getProfile();
-  }, []); // eslint-disable-line
+  }, [userNameProfile, reset]); // eslint-disable-line
   //console.log(userProfile);
 
   return (
     <>
       {userProfile ? (
-        <div class="p-0 m-0">
+        <div className="p-0 m-0">
           {/* Div Banner Azul como el mar */}
           <div
             style={{
@@ -52,27 +53,28 @@ function Profile() {
               alt="img"
             />
           </div>
+
           {/* Div PADRE DE LOS TWEET */}
-          <div class="p-3">
+          <div className="p-3">
             {/* Buttom Profile */}
             <div className="d-flex justify-content-end">
               <Link
                 type="submit"
-                class="btn rounded-pill border"
+                className="btn rounded-pill border"
                 style={{ backgroundColor: "#ffffff", color: "rgb(0, 0, 0)" }}
               >
                 Your Profile
               </Link>
             </div>
 
-            <h3 className="ms-3 mt-3 mb-0">
+            <h3 className="ms-3">
               {userProfile.firstname} {userProfile.lastname}
             </h3>
             {/* Div Tweet */}
-            <div className="d-flex">
+            <div className="d-flex pb-3">
               <div className="ms-3">
                 <small style={{ color: "#647788", fontWeight: "400" }}>
-                  {userProfile.username}
+                  @{userProfile.username}
                 </small>
               </div>
               <div className="ms-auto d-flex align-items-center gap-3">
@@ -105,8 +107,12 @@ function Profile() {
             </div>
 
             {userProfile
-              ? userProfile.tweets.map((tweet) => (
-                  <TweetProfile tweet={tweet} userProfile={userProfile} />
+              ? userProfile.tweets.map((tweet, i) => (
+                  <TweetProfile
+                    key={i}
+                    tweet={tweet}
+                    userProfile={userProfile}
+                  />
                 ))
               : null}
           </div>
