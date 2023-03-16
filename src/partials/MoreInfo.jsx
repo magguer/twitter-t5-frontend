@@ -104,8 +104,8 @@ function MoreInfo() {
             <div className="pt-3 px-3">
               <h3 className="fs-5 fw-bold">Who to follow</h3>
             </div>
-            {users.map((user) => {
-              return <SmallUser key={user.id} smallUser={user} />;
+            {users.map((user, i) => {
+              return <SmallUser key={i} smallUser={user} />;
             })}
           </div>
         </div>
