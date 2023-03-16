@@ -28,7 +28,7 @@ function Profile() {
   return (
     <>
       {userProfile ? (
-        <div>
+        <div class="p-0 m-0">
           {/* Div Banner Azul como el mar */}
           <div
             style={{
@@ -53,7 +53,7 @@ function Profile() {
             />
           </div>
           {/* Div PADRE DE LOS TWEET */}
-          <div class="p-3" style={{ marginTop: "-4rem" }}>
+          <div class="p-3">
             {/* Buttom Profile */}
             <div className="d-flex justify-content-end">
               <Link
