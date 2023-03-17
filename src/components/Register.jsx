@@ -11,6 +11,7 @@ function Register() {
   const [email, setEmail] = useState("");
   const [image, setImage] = useState("");
   const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -33,8 +34,10 @@ function Register() {
       headers: { "Content-Type": "multipart/form-data" },
     });
 
-    if (response.status !== 201) {
-      console.log("Algo salió mal.");
+    if (response.data === "Rellena todos los campos.") {
+      setError("Rellena todos los campos");
+    } else if (response.data === "El usuario ya existe.") {
+      setError("El usuario ya existe");
     } else {
       const response = await axios.post(
         `${process.env.REACT_APP_API_URL}/usuarios/tokens`,
@@ -151,6 +154,7 @@ function Register() {
                   />
                   <label htmlFor="floatingPassword">Password</label>
                 </div>
+                <h3>{error}</h3>
                 <div className="d-grid gap-1 my-5">
                   <button
                     className="btn text-light"

@@ -40,10 +40,11 @@ function Home() {
         data: { tweet: tweet },
       });
     }
+    setTweet("");
   };
 
   return (
-    <div className="container">
+    <div className="container-fliud">
       {/*       Tweet Form */}
       <form className="m-3">
         <h5 className="my-4">Home</h5>

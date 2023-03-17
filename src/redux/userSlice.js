@@ -18,6 +18,11 @@ const userSlice = createSlice({
       state.userFollowing = action.payload.userFollowing
       state.userTweets = action.payload.userTweets
     },
+    edit(state, action) {
+      state.userName = action.payload.username;
+      state.userFirstname = action.payload.firstname;
+      state.userLastname = action.payload.lastname;
+    },
     follow(state, action) {
       state.userFollowing.push(action.payload)
     },
@@ -32,5 +37,5 @@ const userSlice = createSlice({
   },
 });
 
-export const { login, logOut, follow, unfollow } = userSlice.actions;
+export const { login, logOut, follow, unfollow, edit } = userSlice.actions;
 export default userSlice.reducer;

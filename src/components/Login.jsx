@@ -11,7 +11,7 @@ function Login() {
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
   const dispatch = useDispatch();
-
+  const [error, setError] = useState(" ");
   const getToken = async (e) => {
     e.preventDefault();
     const response = await axios.post(
@@ -21,9 +21,18 @@ function Login() {
         password,
       }
     );
-    const user = response.data;
-    dispatch(login(user));
-    navigate(`/`);
+
+    if (
+      response.data === "El usuario no existe." ||
+      response.data === "La pass es inválida" ||
+      response.data === "Rellene todos los campos."
+    ) {
+      setError("Credenciales incorrectas.");
+    } else {
+      const user = response.data;
+      dispatch(login(user));
+      navigate(`/`);
+    }
   };
 
   return (
@@ -84,6 +93,7 @@ function Login() {
                 />
                 <label htmlFor="floatingPassword">Password</label>
               </div>
+              <p style={{ fontSize: "13px" }}>{error}</p>
               <div className="d-grid gap-1 my-5">
                 <button
                   className="btn text-light"
