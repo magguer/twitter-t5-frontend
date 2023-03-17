@@ -3,15 +3,44 @@ import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { Link, useParams } from "react-router-dom";
 import TweetProfile from "../partials/TweetProfile";
+import { useDispatch } from "react-redux";
+import { actualize } from "../redux/resetSlice";
+import { follow, unfollow } from "../redux/userSlice";
 
 function Profile() {
   const userNameProfile = useParams();
   const [userProfile, setUserProfile] = useState(null);
   const user = useSelector((state) => state.user);
   const reset = useSelector((state) => state.reset);
+  const dispatch = useDispatch();
   const [userFollowing, setUserFollowing] = useState(null);
 
-  /*  const userFollowing = true; */
+  // patch para follow
+
+  const handleFollow = async () => {
+    dispatch(actualize());
+    dispatch(follow(userProfile));
+    await axios({
+      headers: {
+        Authorization: `Bearer ${user.userToken}`,
+      },
+      method: "patch",
+      url: `${process.env.REACT_APP_API_URL}/usuarios/${userProfile._id}/follow`,
+    });
+  };
+
+  // patch para unfollow
+  const handleUnFollow = async () => {
+    dispatch(actualize());
+    dispatch(unfollow(userProfile));
+    await axios({
+      headers: {
+        Authorization: `Bearer ${user.userToken}`,
+      },
+      method: "patch",
+      url: `${process.env.REACT_APP_API_URL}/usuarios/${userProfile._id}/unfollow`,
+    });
+  };
 
   useEffect(() => {
     const getProfile = async () => {
@@ -26,8 +55,9 @@ function Profile() {
       setUserFollowing(
         user.userFollowing.some((u) => u.username === userNameProfile.username)
       );
+      console.log(userProfile);
     };
-    console.log(userFollowing);
+    // console.log(userProfile);
     getProfile();
   }, [userNameProfile, reset]); // eslint-disable-line
 
@@ -73,6 +103,7 @@ function Profile() {
                     type="submit"
                     className="btn rounded-pill border"
                     style={{ backgroundColor: "#1d9bf0", color: "white" }}
+                    onClick={handleFollow}
                   >
                     Follow
                   </button>
@@ -84,6 +115,7 @@ function Profile() {
                       backgroundColor: "#ffffff",
                       color: "rgb(0, 0, 0)",
                     }}
+                    onClick={handleUnFollow}
                   >
                     Following
                   </button>
