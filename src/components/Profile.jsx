@@ -61,13 +61,23 @@ function Profile() {
           <div className="p-3">
             {/* Buttom Profile */}
             <div className="d-flex justify-content-end">
-              <Link
-                type="submit"
-                className="btn rounded-pill border"
-                style={{ backgroundColor: "#ffffff", color: "rgb(0, 0, 0)" }}
-              >
-                Your Profile
-              </Link>
+              {userNameProfile.username !== user.userName ? (
+                <Link
+                  type="submit"
+                  className="btn rounded-pill border"
+                  style={{ backgroundColor: "#ffffff", color: "rgb(0, 0, 0)" }}
+                >
+                  Unfollow
+                </Link>
+              ) : (
+                <Link
+                  type="submit"
+                  className="btn rounded-pill border"
+                  style={{ backgroundColor: "#ffffff", color: "rgb(0, 0, 0)" }}
+                >
+                  Your Profile
+                </Link>
+              )}
             </div>
             <div className="mt-4">
               <h3 className="ms-3 mb-0">
