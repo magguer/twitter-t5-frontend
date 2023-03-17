@@ -2,6 +2,7 @@ import axios from "axios";
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { actualize } from "../redux/resetSlice";
+import { Link } from "react-router-dom";
 
 function TweetProfile({ userProfile, tweet }) {
   const dispatch = useDispatch();
@@ -65,9 +66,11 @@ function TweetProfile({ userProfile, tweet }) {
           </div>
           <div className="">
             <div className="d-flex gap-2 align-items-center">
+            <Link to={`/${userProfile.username}`} className="text-decoration-none text-black fw-semibold mb-0 p-0">
               <small className="text-decoration-none text-black fw-semibold mb-0 p-0">
                 {userProfile.firstname} {userProfile.lastname}
               </small>
+              </Link>
               <small
                 className="p-0 m-0"
                 style={{ fontSize: "0.8rem", color: "#969696" }}

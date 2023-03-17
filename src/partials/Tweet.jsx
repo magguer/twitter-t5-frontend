@@ -1,6 +1,7 @@
 import axios from "axios";
 import { useSelector, useDispatch } from "react-redux";
 import { actualize } from "../redux/resetSlice";
+import { Link } from "react-router-dom";
 
 function Tweet({ tweet }) {
   const dispatch = useDispatch();
@@ -64,9 +65,11 @@ function Tweet({ tweet }) {
           </div>
           <div className="">
             <div className="d-flex gap-2 align-items-center">
-              <small className="text-decoration-none text-black fw-semibold mb-0 p-0">
+            
+              <Link to={`/${tweet.user.username}`} className="text-decoration-none text-black fw-semibold mb-0 p-0">
                 {tweet.user.firstname} {tweet.user.lastname}
-              </small>
+              </Link>
+              
               <small
                 className="p-0 m-0"
                 style={{ fontSize: "0.8rem", color: "#969696" }}
@@ -83,6 +86,7 @@ function Tweet({ tweet }) {
                 type="submit"
                 className="gap-2 align-items-center border border-white bg-white m-0 p-0 d-flex align-items-center"
               >
+                
                 <img
                   src={
                     tweetLiked
