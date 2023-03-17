@@ -9,6 +9,9 @@ function Profile() {
   const [userProfile, setUserProfile] = useState(null);
   const user = useSelector((state) => state.user);
   const reset = useSelector((state) => state.reset);
+  const [userFollowing, setUserFollowing] = useState(null);
+
+  /*  const userFollowing = true; */
 
   useEffect(() => {
     const getProfile = async () => {
@@ -17,11 +20,14 @@ function Profile() {
           Authorization: `Bearer ${user.userToken}`,
         },
         method: "get",
-
         url: `http://localhost:8000/usuarios/${userNameProfile.username}`,
       });
       setUserProfile(response.data.userProfile);
+      setUserFollowing(
+        user.userFollowing.some((u) => u.username === userNameProfile.username)
+      );
     };
+    console.log(userFollowing);
     getProfile();
   }, [userNameProfile, reset]); // eslint-disable-line
 
@@ -38,7 +44,7 @@ function Profile() {
             }}
           ></div>
           {/* Div IMG */}
-          <div style={{ position: "relative", top: "-107px" }}>
+          <div style={{ position: "relative", top: "-110px" }}>
             <img
               className="rounded-pill position-absolute ms-3 border border-5 border-white"
               style={{
@@ -62,21 +68,34 @@ function Profile() {
             {/* Buttom Profile */}
             <div className="d-flex justify-content-end">
               {userNameProfile.username !== user.userName ? (
-                <Link
-                  type="submit"
-                  className="btn rounded-pill border"
-                  style={{ backgroundColor: "#ffffff", color: "rgb(0, 0, 0)" }}
-                >
-                  Unfollow
-                </Link>
+                userFollowing === false ? (
+                  <button
+                    type="submit"
+                    className="btn rounded-pill border"
+                    style={{ backgroundColor: "#1d9bf0", color: "white" }}
+                  >
+                    Follow
+                  </button>
+                ) : (
+                  <button
+                    type="submit"
+                    className="btn rounded-pill border"
+                    style={{
+                      backgroundColor: "#ffffff",
+                      color: "rgb(0, 0, 0)",
+                    }}
+                  >
+                    Following
+                  </button>
+                )
               ) : (
-                <Link
+                <button
                   type="submit"
                   className="btn rounded-pill border"
                   style={{ backgroundColor: "#ffffff", color: "rgb(0, 0, 0)" }}
                 >
                   Your Profile
-                </Link>
+                </button>
               )}
             </div>
             <div className="mt-4">
