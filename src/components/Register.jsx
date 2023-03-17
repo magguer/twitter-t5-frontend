@@ -52,7 +52,7 @@ function Register() {
   return (
     <div
       className="text-emphasis-primary"
-      style={{ backgroundColor: "#065990" }}
+      style={{ backgroundColor: "#065990", height: "100vh" }}
     >
       <div className="container py-5">
         <div className="row g-0 shadow overflow-hidden rounded shadow">
