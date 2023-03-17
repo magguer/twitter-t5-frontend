@@ -44,7 +44,7 @@ function SmallUser({ smallUser }) {
             <img
               style={{ width: "2.5rem" }}
               className="figure-img img-fluid rounded-pill align-self-center"
-              alt="image"
+              alt="images"
               src={
                 smallUser.image.includes("http")
                   ? smallUser.image

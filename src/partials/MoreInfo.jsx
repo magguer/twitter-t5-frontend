@@ -21,7 +21,6 @@ function MoreInfo() {
     };
     getUser();
   }, []); // eslint-disable-line
-
   return (
     <div className="sticky-top">
       <div className="sticky-top d-flex flex-column ps-3 pe-5 py-2">
@@ -104,9 +103,13 @@ function MoreInfo() {
             <div className="pt-2 px-3">
               <h3 className="fs-5 fw-bold">Who to follow</h3>
             </div>
-            {users.map((user, i) => {
-              return <SmallUser key={i} smallUser={user} />;
-            })}
+            {user.userId !== users.id
+              ? users.map((user, i) => {
+                  return <SmallUser key={i} smallUser={user} />;
+                })
+              : users.map((user, i) => {
+                  return <SmallUser key={i} smallUser={user} />;
+                })}
           </div>
         </div>
       </div>

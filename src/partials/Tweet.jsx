@@ -116,7 +116,7 @@ function Tweet({ tweet }) {
               {user.userName === tweet.user.username && (
                 <button
                   type="submit"
-                  className="border border-white bg-white m-0 p-0 d-flex align-items-center"
+                  className="border border-white bg-white m-0 p-0 d-flex align-items-center me-3"
                   onClick={handleDeleteTweet}
                 >
                   <img
