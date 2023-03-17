@@ -2,6 +2,10 @@ import axios from "axios";
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { actualize } from "../redux/resetSlice";
+import { Link } from "react-router-dom";
+import { formatDistance } from 'date-fns';
+//import { formatDateDistance } from "./date-fns";
+
 
 function TweetProfile({ userProfile, tweet }) {
   const dispatch = useDispatch();
@@ -48,16 +52,18 @@ function TweetProfile({ userProfile, tweet }) {
   return (
     <>
       <div className="d-flex w-100 p-3 border-top border-succes gap-3">
-        <img
-          style={{ width: "2.5rem" }}
-          className="figure-img img-fluid rounded-pill align-self-start"
-          alt="img"
-          src={
-            userProfile.image.includes("http")
-              ? userProfile.image
-              : `${process.env.REACT_APP_API_URL}/img/${userProfile.image}`
-          }
-        />
+        <Link to={`/${userProfile.username}`}>
+          <img
+            style={{ width: "2.5rem" }}
+            className="figure-img img-fluid rounded-pill align-self-start"
+            alt="img"
+            src={
+              userProfile.image.includes("http")
+                ? userProfile.image
+                : `${process.env.REACT_APP_API_URL}/img/${userProfile.image}`
+            }
+          />
+        </Link>
         {/* a partir de aca */}
         <div className="d-flex flex-column w-100">
           <div className="d-flex align-items-center gap-1">
@@ -65,15 +71,24 @@ function TweetProfile({ userProfile, tweet }) {
           </div>
           <div className="">
             <div className="d-flex gap-2 align-items-center">
-              <small className="text-decoration-none text-black fw-semibold mb-0 p-0">
-                {userProfile.firstname} {userProfile.lastname}
-              </small>
+              <Link
+                to={`/${userProfile.username}`}
+                className="text-decoration-none text-black fw-semibold mb-0 p-0"
+              >
+                <small className="text-decoration-none text-black fw-semibold mb-0 p-0">
+                  {userProfile.firstname} {userProfile.lastname}
+                </small>
+              </Link>
               <small
                 className="p-0 m-0"
                 style={{ fontSize: "0.8rem", color: "#969696" }}
               >
                 @{userProfile.username}
               </small>
+              {/*FORMAT DISTANCE */}
+              <small class="p-0 m-0" style={{fontSize: "0.8rem", color: "#969696"}}> 
+               {formatDistance(new Date(tweet.createdAt), new Date())}
+              </small> 
             </div>
             <p className="mb-2">{tweet.text}</p>
             {/*  Botones */}

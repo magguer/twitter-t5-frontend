@@ -13,7 +13,6 @@ function FollowPage() {
 
   const [userFollowers, setUserFollowers] = useState(null);
   const [userFollowing, setUserFollowing] = useState(null);
-
   const [showFollowers, setShowFollowers] = useState(true);
 
   //Llamado de Followers
@@ -24,7 +23,6 @@ function FollowPage() {
           Authorization: `Bearer ${user.userToken}`,
         },
         method: "get",
-
         url: `${process.env.REACT_APP_API_URL}/usuarios/${userProfile.username}/followers`,
       });
       setUserFollowers(response.data);
@@ -52,7 +50,7 @@ function FollowPage() {
     <>
       {userFollowers && userFollowing ? (
         <>
-          <div className="w-100">
+          <div>
             <HeaderFollow
               setShowFollowers={setShowFollowers}
               showFollowers={showFollowers}
@@ -60,11 +58,11 @@ function FollowPage() {
             />
           </div>
           {showFollowers ? (
-            <div className="w-100">
+            <div>
               <Followers userFollowers={userFollowers} />
             </div>
           ) : (
-            <div className="w-100">
+            <div>
               <Following userFollowing={userFollowing} />
             </div>
           )}

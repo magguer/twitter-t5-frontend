@@ -1,6 +1,10 @@
 import axios from "axios";
 import { useSelector, useDispatch } from "react-redux";
 import { actualize } from "../redux/resetSlice";
+import { Link } from "react-router-dom";
+import { formatDistance } from 'date-fns';
+//import { formatDateDistance } from "./date-fns";
+
 
 function Tweet({ tweet }) {
   const dispatch = useDispatch();
@@ -47,16 +51,18 @@ function Tweet({ tweet }) {
   return (
     <>
       <div className="d-flex w-100 p-3 border-top border-succes gap-3">
-        <img
-          style={{ width: "2.5rem" }}
-          className="figure-img img-fluid rounded-pill align-self-start"
-          alt="img"
-          src={
-            tweet.user.image.includes("http")
-              ? tweet.user.image
-              : `${process.env.REACT_APP_API_URL}/img/${tweet.user.image}`
-          }
-        />
+        <Link to={`/${tweet.user.username}`}>
+          <img
+            style={{ width: "2.5rem" }}
+            className="figure-img img-fluid rounded-pill align-self-start"
+            alt="img"
+            src={
+              tweet.user.image.includes("http")
+                ? tweet.user.image
+                : `${process.env.REACT_APP_API_URL}/img/${tweet.user.image}`
+            }
+          />
+        </Link>
         {/* a partir de aca */}
         <div className="d-flex flex-column w-100">
           <div className="d-flex align-items-center gap-1">
@@ -64,15 +70,22 @@ function Tweet({ tweet }) {
           </div>
           <div className="">
             <div className="d-flex gap-2 align-items-center">
-              <small className="text-decoration-none text-black fw-semibold mb-0 p-0">
+              <Link
+                to={`/${tweet.user.username}`}
+                className="text-decoration-none text-black fw-semibold mb-0 p-0"
+              >
                 {tweet.user.firstname} {tweet.user.lastname}
-              </small>
+              </Link>
+
               <small
                 className="p-0 m-0"
                 style={{ fontSize: "0.8rem", color: "#969696" }}
               >
                 @{tweet.user.username}
               </small>
+              <small class="p-0 m-0" style={{fontSize: "0.8rem", color: "#969696"}}> 
+               {formatDistance(new Date(tweet.createdAt), new Date())}
+              </small> 
             </div>
             <p className="mb-2">{tweet.text}</p>
             {/*  Botones */}

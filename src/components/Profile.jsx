@@ -115,7 +115,7 @@ function Profile() {
                     </small>
                     <Link
                       className="text-decoration-none"
-                      to={`http://localhost:3000/${userProfile.username}/follows`}
+                      to={`http://localhost:3000/${userProfile.username}/followers`}
                       style={{ color: "#647788" }}
                     >
                       Followers
@@ -127,7 +127,7 @@ function Profile() {
                     </small>
                     <Link
                       className="text-decoration-none"
-                      to={`http://localhost:3000/${userProfile.username}/follows`}
+                      to={`http://localhost:3000/${userProfile.username}/following`}
                       style={{ color: "#647788" }}
                     >
                       Following
