@@ -2,14 +2,21 @@ import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import { logOut } from "../redux/userSlice";
+import { toggleDarkMode } from "../redux/darkModeSlice";
 
 function Header() {
   const user = useSelector((state) => state.user);
   const dispatch = useDispatch();
+  const isDarkModeEnabled = useSelector((state) => state.darkMode);
   const [showOptions, setShowOptions] = useState(false);
 
+
+  const handleToggleDarkMode = () => {
+    dispatch(toggleDarkMode());
+  }
+
   return (
-    <div className="sticky-top">
+    <div className={`sticky-top ${isDarkModeEnabled ? 'darkMode' : 'whiteMode'} `}>
       {showOptions && (
         <div
           style={{
@@ -30,6 +37,7 @@ function Header() {
               alt="user_icon"
             />
           </button>
+
         </div>
       )}
       <div
@@ -73,6 +81,18 @@ function Header() {
                 alt="user_icon"
               />
             </Link>
+             {/* <!-- Dark Mode --> */}
+             <button className="btn" onClick={handleToggleDarkMode} style={{ display: 'none'}}>
+             <img
+                style={{ width: "60px", display: 'none' }}
+                src="https://cdn-icons-png.flaticon.com/512/6714/6714978.png"
+                alt="user_icon"
+                
+                
+              />
+
+             </button>
+           
           </div>
         </div>
         {/*<!--   Nav logout --> */}
