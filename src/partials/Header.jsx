@@ -2,11 +2,7 @@ import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import { logOut } from "../redux/userSlice";
-<<<<<<< HEAD
-import TweetModal from "./TweetModal";
-=======
 import { toggleDarkMode } from "../redux/darkModeSlice";
->>>>>>> 9a0049e3b32be221c8843d23ad523876f4f088d5
 
 function Header() {
   const user = useSelector((state) => state.user);
