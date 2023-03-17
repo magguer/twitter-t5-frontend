@@ -36,67 +36,71 @@ function SmallUser({ smallUser }) {
 
   return (
     <>
-      <div className="d-flex w-100 align-items-center px-4 py-2">
-        {/* Info Usuario */}
-        <div className="d-flex align-items-center gap-3 w-100">
-          {/* Imagen Usuario */}
-          <Link to={`/${smallUser.username}`}>
-            <img
-              style={{ width: "2.5rem" }}
-              className="figure-img img-fluid rounded-pill align-self-center"
-              alt="images"
-              src={
-                smallUser.image.includes("http")
-                  ? smallUser.image
-                  : `${process.env.REACT_APP_API_URL}/img/${smallUser.image}`
-              }
-            />
-          </Link>
-          {/* Desc. Usuario */}
-          <div>
-            <Link
-              to={`/${smallUser.username}`}
-              className="text-decoration-none text-black"
-            >
-              <h6 className="mb-0 p-0">
-                {smallUser.firstname} {smallUser.lastname}
-              </h6>
-            </Link>
-            <p
-              className="p-0 m-0"
-              style={{ fontSize: "0.8rem", color: "#969696" }}
-            >
-              @{smallUser.username}
-            </p>
+      {smallUser ? (
+        <>
+          <div className="d-flex w-100 align-items-center px-4 py-2">
+            {/* Info Usuario */}
+            <div className="d-flex align-items-center gap-3 w-100">
+              {/* Imagen Usuario */}
+              <Link to={`/${smallUser.username}`}>
+                <img
+                  style={{ width: "2.5rem" }}
+                  className="figure-img img-fluid rounded-pill align-self-center"
+                  alt="images"
+                  src={
+                    smallUser.image.includes("http")
+                      ? smallUser.image
+                      : `${process.env.REACT_APP_API_URL}/img/${smallUser.image}`
+                  }
+                />
+              </Link>
+              {/* Desc. Usuario */}
+              <div>
+                <Link
+                  to={`/${smallUser.username}`}
+                  className="text-decoration-none text-black"
+                >
+                  <h6 className="mb-0 p-0">
+                    {smallUser.firstname} {smallUser.lastname}
+                  </h6>
+                </Link>
+                <p
+                  className="p-0 m-0"
+                  style={{ fontSize: "0.8rem", color: "#969696" }}
+                >
+                  @{smallUser.username}
+                </p>
+              </div>
+            </div>
+            {/*   */}
+            {!true ? (
+              <div className="justify-content-end">
+                <button
+                  onClick={getFollow}
+                  type="submit"
+                  className="btn rounded-pill"
+                  style={{ backgroundColor: "#1d9bf0", color: "white" }}
+                >
+                  Follow
+                </button>
+              </div>
+            ) : (
+              /*  Si el usuario ya lo sigue, mostrar el boton de unfollow */
+              <div className="justify-content-end">
+                <button
+                  onClick={getUnFollow}
+                  type="submit"
+                  className="btn rounded-pill border"
+                  style={{ backgroundColor: "#ffffff", color: "rgb(0, 0, 0)" }}
+                >
+                  Following
+                </button>
+              </div>
+              /* )} */
+            )}
           </div>
-        </div>
-
-        {!user.userFollowing.some((u) => u._id === smallUser._id) ? (
-          <div className="justify-content-end">
-            <button
-              onClick={getFollow}
-              type="submit"
-              className="btn rounded-pill"
-              style={{ backgroundColor: "#1d9bf0", color: "white" }}
-            >
-              Follow
-            </button>
-          </div>
-        ) : (
-          /*  Si el usuario ya lo sigue, mostrar el boton de unfollow */
-          <div className="justify-content-end">
-            <button
-              onClick={getUnFollow}
-              type="submit"
-              className="btn rounded-pill border"
-              style={{ backgroundColor: "#ffffff", color: "rgb(0, 0, 0)" }}
-            >
-              Following
-            </button>
-          </div>
-          /* )} */
-        )}
-      </div>
+        </>
+      ) : null}
     </>
   );
 }

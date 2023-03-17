@@ -28,15 +28,16 @@ function Register() {
 
     const response = await axios({
       method: "POST",
-      url: `${process.env.REACT_APP_API_URL}/user`,
+      url: `${process.env.REACT_APP_API_URL}/usuarios/users`,
       data: formData,
       headers: { "Content-Type": "multipart/form-data" },
     });
+
     if (response.status !== 201) {
       console.log("Algo salió mal.");
     } else {
       const response = await axios.post(
-        `${process.env.REACT_APP_API_URL}/token`,
+        `${process.env.REACT_APP_API_URL}/usuarios/tokens`,
         {
           email,
           password,
