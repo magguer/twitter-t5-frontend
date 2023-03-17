@@ -24,7 +24,7 @@ function Home() {
       setTweets(response.data.tweets);
     };
     getHome();
-  }, [reset]);
+  }, [reset]); // eslint-disable-line
 
   // Post de tweet
   const handleTweet = async (e) => {
@@ -43,7 +43,7 @@ function Home() {
   };
 
   return (
-    <div>
+    <div className="container">
       {/*       Tweet Form */}
       <form className="m-3">
         <h5 className="my-4">Home</h5>
@@ -51,7 +51,7 @@ function Home() {
           <img
             style={{ width: "4rem" }}
             className="figure-img img-fluid rounded-pill align-self-start"
-            alt="image"
+            alt="images"
             src={
               user.userImage.includes("http")
                 ? user.userImage
