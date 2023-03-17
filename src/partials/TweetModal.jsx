@@ -2,16 +2,18 @@ import axios from "axios";
 import { useState } from "react";
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { actualize } from "../redux/resetSlice";
 
 function TweetModal({ show, handleClose }) {
+  const dispatch = useDispatch();
   const [tweet, setTweet] = useState("");
   const user = useSelector((state) => state.user);
 
+  // POST TWEET
   const handleTweet = async (e) => {
     if (tweet !== "") {
-      dispatchEvent(actualize());
+      dispatch(actualize());
       e.preventDefault();
       await axios({
         headers: {
@@ -22,6 +24,7 @@ function TweetModal({ show, handleClose }) {
         data: { tweet: tweet },
       });
     }
+    handleClose();
   };
 
   return (
