@@ -3,6 +3,9 @@ import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { actualize } from "../redux/resetSlice";
 import { Link } from "react-router-dom";
+import { formatDistance } from 'date-fns';
+//import { formatDateDistance } from "./date-fns";
+
 
 function TweetProfile({ userProfile, tweet }) {
   const dispatch = useDispatch();
@@ -82,6 +85,10 @@ function TweetProfile({ userProfile, tweet }) {
               >
                 @{userProfile.username}
               </small>
+              {/*FORMAT DISTANCE */}
+              <small class="p-0 m-0" style={{fontSize: "0.8rem", color: "#969696"}}> 
+               {formatDistance(new Date(tweet.createdAt), new Date())}
+              </small> 
             </div>
             <p className="mb-2">{tweet.text}</p>
             {/*  Botones */}
