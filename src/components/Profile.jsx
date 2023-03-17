@@ -16,10 +16,9 @@ function Profile() {
   const [userFollowing, setUserFollowing] = useState(null);
 
   // patch para follow
-
   const handleFollow = async () => {
-    dispatch(actualize());
     dispatch(follow(userProfile));
+    dispatch(actualize());
     await axios({
       headers: {
         Authorization: `Bearer ${user.userToken}`,
@@ -29,10 +28,10 @@ function Profile() {
     });
   };
 
-  // patch para unfollow
+  // Llamado de Unfollow
   const handleUnFollow = async () => {
-    dispatch(actualize());
     dispatch(unfollow(userProfile));
+    dispatch(actualize());
     await axios({
       headers: {
         Authorization: `Bearer ${user.userToken}`,
@@ -55,7 +54,6 @@ function Profile() {
       setUserFollowing(
         user.userFollowing.some((u) => u.username === userNameProfile.username)
       );
-      console.log(userProfile);
     };
     // console.log(userProfile);
     getProfile();

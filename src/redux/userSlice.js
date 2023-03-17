@@ -19,7 +19,7 @@ const userSlice = createSlice({
       state.userTweets = action.payload.userTweets
     },
     follow(state, action) {
-      state.userFollowing.push(action.payload.smallUser)
+      state.userFollowing.push(action.payload)
     },
     unfollow(state, action) {
       const following = state.userFollowing.filter((user) => user.username !== action.payload.username)

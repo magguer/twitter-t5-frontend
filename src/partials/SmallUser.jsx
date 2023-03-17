@@ -10,7 +10,7 @@ function SmallUser({ smallUser }) {
 
   //Llamado de Follow
   const getFollow = async () => {
-    dispatch(follow({ smallUser }));
+    dispatch(follow(smallUser));
     dispatch(actualize());
     await axios({
       headers: {
@@ -72,8 +72,8 @@ function SmallUser({ smallUser }) {
                 </p>
               </div>
             </div>
-            {/*   */}
-            {!true ? (
+            {/*  user.userFollowing.some((u) => u._id === smallUser._id) */}
+            {!user.userFollowing.some((u) => u._id === smallUser._id) ? (
               <div className="justify-content-end">
                 <button
                   onClick={getFollow}
