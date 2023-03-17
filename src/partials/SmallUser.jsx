@@ -95,7 +95,7 @@ function SmallUser({ smallUser }) {
               className="btn rounded-pill border"
               style={{ backgroundColor: "#ffffff", color: "rgb(0, 0, 0)" }}
             >
-              Unfollow
+              Following
             </button>
           </div>
           /* )} */

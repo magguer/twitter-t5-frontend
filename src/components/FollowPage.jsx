@@ -52,7 +52,7 @@ function FollowPage() {
     <>
       {userFollowers && userFollowing ? (
         <>
-          <div>
+          <div className="w-100">
             <HeaderFollow
               setShowFollowers={setShowFollowers}
               showFollowers={showFollowers}
@@ -60,11 +60,11 @@ function FollowPage() {
             />
           </div>
           {showFollowers ? (
-            <div>
+            <div className="w-100">
               <Followers userFollowers={userFollowers} />
             </div>
           ) : (
-            <div>
+            <div className="w-100">
               <Following userFollowing={userFollowing} />
             </div>
           )}

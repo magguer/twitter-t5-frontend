@@ -51,7 +51,11 @@ function Tweet({ tweet }) {
           style={{ width: "2.5rem" }}
           className="figure-img img-fluid rounded-pill align-self-start"
           alt="img"
-          src={tweet.user.image}
+          src={
+            tweet.user.image.includes("http")
+              ? tweet.user.image
+              : `${process.env.REACT_APP_API_URL}/img/${tweet.user.image}`
+          }
         />
         {/* a partir de aca */}
         <div className="d-flex flex-column w-100">

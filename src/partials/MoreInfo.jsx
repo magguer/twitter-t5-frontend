@@ -24,7 +24,7 @@ function MoreInfo() {
 
   return (
     <div className="sticky-top">
-      <div className="sticky-top d-flex flex-column p-3">
+      <div className="sticky-top d-flex flex-column px-3 py-2">
         {/* What's happening */}
         <div className="d-flex flex-column">
           <div

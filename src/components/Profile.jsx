@@ -24,7 +24,6 @@ function Profile() {
     };
     getProfile();
   }, [userNameProfile, reset]); // eslint-disable-line
-  //console.log(userProfile);
 
   return (
     <>
@@ -41,7 +40,7 @@ function Profile() {
           {/* Div IMG */}
           <div style={{ position: "relative", top: "-107px" }}>
             <img
-              className="rounded-pill position-relative ms-3 border border-5 border-white"
+              className="rounded-pill position-absolute ms-3 border border-5 border-white"
               style={{
                 height: "7rem",
                 width: "7rem",
@@ -49,7 +48,11 @@ function Profile() {
                 borderStyle: "solid",
                 borderColor: "white",
               }}
-              src={userProfile.image}
+              src={
+                userProfile.image.includes("http")
+                  ? userProfile.image
+                  : `${process.env.REACT_APP_API_URL}/img/${userProfile.image}`
+              }
               alt="img"
             />
           </div>
@@ -66,46 +69,44 @@ function Profile() {
                 Your Profile
               </Link>
             </div>
-
-            <h3 className="ms-3">
-              {userProfile.firstname} {userProfile.lastname}
-            </h3>
-            {/* Div Tweet */}
-            <div className="d-flex pb-3">
-              <div className="ms-3">
-                <small style={{ color: "#647788", fontWeight: "400" }}>
-                  @{userProfile.username}
-                </small>
-              </div>
-              <div className="ms-auto d-flex align-items-center gap-3">
-                <div className="d-flex align-items-center gap-1">
-                  <small style={{ fontWeight: "700", color: "#000000" }}>
-                    {userProfile.followers.length}
+            <div className="mt-4">
+              <h3 className="ms-3 mb-0">
+                {userProfile.firstname} {userProfile.lastname}
+              </h3>
+              <div className="d-flex pb-3">
+                <div className="ms-3">
+                  <small style={{ color: "#969696", fontWeight: "400" }}>
+                    @{userProfile.username}
                   </small>
-
-                  <Link
-                    className="text-decoration-none"
-                    to={`http://localhost:3000/${userProfile.username}/follows`}
-                    style={{ color: "#647788" }}
-                  >
-                    Followers
-                  </Link>
-
-                  <small style={{ fontWeight: "700", color: "#000000" }}>
-                    {userProfile.following.length}
-                  </small>
-
-                  <Link
-                    className="text-decoration-none"
-                    to={`http://localhost:3000/${userProfile.username}/follows`}
-                    style={{ color: "#647788" }}
-                  >
-                    Following
-                  </Link>
+                </div>
+                <div className="ms-auto d-flex align-items-center gap-3">
+                  <div className="d-flex align-items-center gap-2">
+                    <small style={{ fontWeight: "700", color: "#000000" }}>
+                      {userProfile.followers.length}
+                    </small>
+                    <Link
+                      className="text-decoration-none"
+                      to={`http://localhost:3000/${userProfile.username}/follows`}
+                      style={{ color: "#647788" }}
+                    >
+                      Followers
+                    </Link>
+                  </div>
+                  <div className="d-flex align-items-center gap-2">
+                    <small style={{ fontWeight: "700", color: "#000000" }}>
+                      {userProfile.following.length}
+                    </small>
+                    <Link
+                      className="text-decoration-none"
+                      to={`http://localhost:3000/${userProfile.username}/follows`}
+                      style={{ color: "#647788" }}
+                    >
+                      Following
+                    </Link>
+                  </div>
                 </div>
               </div>
             </div>
-
             {userProfile
               ? userProfile.tweets.map((tweet, i) => (
                   <TweetProfile

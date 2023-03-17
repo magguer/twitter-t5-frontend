@@ -15,7 +15,9 @@ function HeaderFollow({ userFollowing, showFollowers, setShowFollowers }) {
             <h5 className="mb-0">
               {userFollowing.firstname} {userFollowing.lastname}
             </h5>
-            <small>@{userFollowing.username}</small>
+            <small style={{ color: "#969696" }}>
+              @{userFollowing.username}
+            </small>
           </div>
         </div>
       </div>
