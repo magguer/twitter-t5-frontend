@@ -48,16 +48,18 @@ function Tweet({ tweet }) {
   return (
     <>
       <div className="d-flex w-100 p-3 border-top border-succes gap-3">
-        <img
-          style={{ width: "2.5rem" }}
-          className="figure-img img-fluid rounded-pill align-self-start"
-          alt="img"
-          src={
-            tweet.user.image.includes("http")
-              ? tweet.user.image
-              : `${process.env.REACT_APP_API_URL}/img/${tweet.user.image}`
-          }
-        />
+        <Link to={`/${tweet.user.username}`}>
+          <img
+            style={{ width: "2.5rem" }}
+            className="figure-img img-fluid rounded-pill align-self-start"
+            alt="img"
+            src={
+              tweet.user.image.includes("http")
+                ? tweet.user.image
+                : `${process.env.REACT_APP_API_URL}/img/${tweet.user.image}`
+            }
+          />
+        </Link>
         {/* a partir de aca */}
         <div className="d-flex flex-column w-100">
           <div className="d-flex align-items-center gap-1">
@@ -65,11 +67,13 @@ function Tweet({ tweet }) {
           </div>
           <div className="">
             <div className="d-flex gap-2 align-items-center">
-            
-              <Link to={`/${tweet.user.username}`} className="text-decoration-none text-black fw-semibold mb-0 p-0">
+              <Link
+                to={`/${tweet.user.username}`}
+                className="text-decoration-none text-black fw-semibold mb-0 p-0"
+              >
                 {tweet.user.firstname} {tweet.user.lastname}
               </Link>
-              
+
               <small
                 className="p-0 m-0"
                 style={{ fontSize: "0.8rem", color: "#969696" }}
@@ -86,7 +90,6 @@ function Tweet({ tweet }) {
                 type="submit"
                 className="gap-2 align-items-center border border-white bg-white m-0 p-0 d-flex align-items-center"
               >
-                
                 <img
                   src={
                     tweetLiked
