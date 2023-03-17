@@ -84,9 +84,7 @@ function Header() {
             className="d-flex justify-content-center"
             style={{ backgroundColor: "#f01d1d00", border: "none" }}
           >
-            <div className="text-primary" style={{ fontSize: "4rem" }}>
-              ...
-            </div>
+            <div style={{ fontSize: "4rem", color: "#1d9bf0" }}>...</div>
           </button>
         </div>
       </div>
