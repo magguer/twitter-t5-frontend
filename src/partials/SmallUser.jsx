@@ -9,8 +9,8 @@ function SmallUser({ smallUser }) {
   const dispatch = useDispatch();
 
   /*   const userFollowing = false; */
-
-  const userFollowing = user.userFollowing.some((u) => u._id === smallUser._id);
+  const userFollowing = true;
+  // const userFollowing = user.userFollowing.some((u) => u._id === smallUser._id);
 
   //Llamado de Follow
   const getFollow = async () => {
