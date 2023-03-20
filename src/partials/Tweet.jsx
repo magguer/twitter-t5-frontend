@@ -9,6 +9,8 @@ import { formatDistance } from "date-fns";
 function Tweet({ tweet }) {
   const dispatch = useDispatch();
   const user = useSelector((state) => state.user);
+  /* 
+  const tweetLiked = true; */
 
   const tweetLiked = tweet.likes.some(
     (like) => like.username === user.userName
@@ -28,7 +30,7 @@ function Tweet({ tweet }) {
 
   /* Like Tweet */
   const likeTweet = async () => {
-    dispatch(actualize())
+    dispatch(actualize());
     /* dispatch(likeTweet(tweet)) */
     if (!tweetLiked) {
       await axios({
@@ -38,8 +40,6 @@ function Tweet({ tweet }) {
         method: "PATCH",
         url: `http://localhost:8000/tweets/like/${tweet._id}`,
       });
-
-
     } else {
       await axios({
         headers: {
@@ -49,7 +49,6 @@ function Tweet({ tweet }) {
         url: `http://localhost:8000/tweets/dislike/${tweet._id}`,
       });
     }
-
   };
 
   return (
@@ -114,7 +113,11 @@ function Tweet({ tweet }) {
                   alt="heart-white"
                 />
                 <h2
-                  style={{ fontSize: "1rem", color: "#000000" }}
+                  style={{
+                    fontSize: "0.9rem",
+                    color: "#000000",
+                    fontWeight: "400",
+                  }}
                   className="m-0"
                 >
                   {tweet.likes.length}

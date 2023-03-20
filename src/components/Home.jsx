@@ -21,7 +21,7 @@ function Home() {
         method: "get",
         url: `${process.env.REACT_APP_API_URL}/tweets`,
       });
-      dispatch(getTweets(response.data.tweets))
+      dispatch(getTweets(response.data.tweets));
     };
     getHome();
   }, [reset]); // eslint-disable-line
@@ -38,14 +38,11 @@ function Home() {
         url: `${process.env.REACT_APP_API_URL}/tweets/`,
         data: { tweet: tweet },
       });
+      console.log(response.data);
       dispatch(postTweet(response.data));
     }
     setTweet("");
-   
   };
-
-
-
 
   return (
     <div className="container-fliud">
