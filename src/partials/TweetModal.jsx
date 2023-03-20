@@ -32,20 +32,19 @@ function TweetModal({ show, handleClose }) {
       aria-labelledby="contained-modal-title-vcenter"
       centered
       show={show}
-      handleClose={handleClose}
       onHide={handleClose}
     >
       <Modal.Header closeButton>
         <Modal.Title>
-          <h2 className="text-center">Post Your Tweet 😉 </h2>
+          <h2 className="text-center fs-4">Post Your Tweet 😉 </h2>
         </Modal.Title>
       </Modal.Header>
-      <Modal.Body>
+      <div className="p-4">
         <form>
           <div className="d-flex">
             <div className="me-2">
               <img
-                style={{ width: "4rem" }}
+                style={{ width: "3rem" }}
                 className="figure-img img-fluid rounded-pill align-self-start"
                 alt="images"
                 src={
@@ -67,21 +66,8 @@ function TweetModal({ show, handleClose }) {
               />
             </div>
           </div>
-          <hr />
-          <div className="d-flex justify-content-end">
-            {/* <Button
-              className="btn text-light ms-2"
-              style={{
-                borderRadius: "45px",
-                backgroundColor: "#1d9bf0",
-                height: "40px",
-              }}
-              variant="secondary"
-              onClick={handleClose}
-            >
-              Close
-            </Button> */}
-            <Button
+          <div className="d-flex justify-content-end mt-3">
+            <button
               className="btn text-light"
               type="submit"
               style={{
@@ -92,10 +78,10 @@ function TweetModal({ show, handleClose }) {
               onClick={handleTweet}
             >
               Tweet
-            </Button>
+            </button>
           </div>
         </form>
-      </Modal.Body>
+      </div>
     </Modal>
   );
 }

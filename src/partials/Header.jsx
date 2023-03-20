@@ -80,13 +80,13 @@ function Header() {
                 />
               </Link>
               {/* <!--       New Tweet Anchor --> */}
-              <button className="btn" onClick={handleShow}>
+              <div style={{ cursor: "pointer" }} onClick={handleShow}>
                 <img
                   style={{ width: "100px" }}
                   src="https://beconnected.esafety.gov.au/pluginfile.php/69203/mod_resource/content/1/t26_c6_a4_p2.png"
                   alt="tweet_icon"
                 />
-              </button>
+              </div>
             </div>
           </div>
           {/*<!--   Nav logout --> */}

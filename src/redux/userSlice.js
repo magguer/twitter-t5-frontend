@@ -1,4 +1,4 @@
-import { createSlice, current } from "@reduxjs/toolkit";
+import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = null;
 
@@ -7,16 +7,7 @@ const userSlice = createSlice({
   initialState,
   reducers: {
     login(state, action) {
-      /*       state = action.payload */
-      state.userName = action.payload.userName;
-      state.userToken = action.payload.userToken;
-      state.userId = action.payload.userId;
-      state.userFirstname = action.payload.userFirstName;
-      state.userLastname = action.payload.userLastName;
-      state.userImage = action.payload.userImage;
-      state.userFollowers = action.payload.userFollowers
-      state.userFollowing = action.payload.userFollowing
-      state.userTweets = action.payload.userTweets
+      return action.payload
     },
     edit(state, action) {
       state.userName = action.payload.username;
@@ -31,7 +22,7 @@ const userSlice = createSlice({
       return { ...state, userFollowing: following }
     },
     logOut(state, action) {
-      return (state = {});
+      return null;
 
     },
   },

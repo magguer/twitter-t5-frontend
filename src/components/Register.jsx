@@ -46,6 +46,7 @@ function Register() {
           password,
         }
       );
+      console.log(response.data);
       const user = response.data;
       dispatch(login(user));
       navigate(`/`);
