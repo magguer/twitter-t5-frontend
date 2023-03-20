@@ -17,7 +17,7 @@ function Profile() {
   const [userFollowing, setUserFollowing] = useState(null);
 
   useEffect(() => {
-    document.title = `Twitter | ${userNameProfile.username}`;
+    document.title = `Twitter / ${userNameProfile.username}`;
   }, [userNameProfile]);
 
   const [show, setShow] = useState(false);
@@ -51,6 +51,7 @@ function Profile() {
     });
   };
 
+  // Get User
   useEffect(() => {
     const getProfile = async () => {
       const response = await axios({
@@ -65,7 +66,7 @@ function Profile() {
         user.following.some((u) => u.username === userNameProfile.username)
       );
     };
-    // console.log(userProfile);
+
     getProfile();
   }, [userNameProfile, reset]); // eslint-disable-line
 

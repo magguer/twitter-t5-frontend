@@ -16,6 +16,8 @@ function EditProfileModal({ show, handleClose, userProfile }) {
   const [banner, setBanner] = useState(null);
   const [image, setImage] = useState(null);
 
+  /*   console.log(userProfile); */
+
   const patchUser = async (e) => {
     dispatch(edit({ username, firstname, lastname }));
     dispatch(actualize());
