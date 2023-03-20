@@ -17,7 +17,7 @@ function Following() {
     const getFollowing = async () => {
       const response = await axios({
         headers: {
-          Authorization: `Bearer ${user.userToken}`,
+          Authorization: `Bearer ${user.token}`,
         },
         method: "get",
 

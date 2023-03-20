@@ -14,7 +14,7 @@ function SmallUser({ smallUser }) {
     dispatch(actualize());
     await axios({
       headers: {
-        Authorization: `Bearer ${user.userToken}`,
+        Authorization: `Bearer ${user.token}`,
       },
       method: "patch",
       url: `${process.env.REACT_APP_API_URL}/usuarios/${smallUser._id}/follow`,
@@ -27,7 +27,7 @@ function SmallUser({ smallUser }) {
     dispatch(actualize());
     await axios({
       headers: {
-        Authorization: `Bearer ${user.userToken}`,
+        Authorization: `Bearer ${user.token}`,
       },
       method: "patch",
       url: `${process.env.REACT_APP_API_URL}/usuarios/${smallUser._id}/unfollow`,
@@ -77,7 +77,7 @@ function SmallUser({ smallUser }) {
               </div>
             </div>
             {/*  user.userFollowing.some((u) => u._id === smallUser._id) */}
-            {!user.userFollowing.some((u) => u._id === smallUser._id) ? (
+            {!user.following.some((u) => u._id === smallUser._id) ? (
               <div className="justify-content-end">
                 <button
                   onClick={getFollow}

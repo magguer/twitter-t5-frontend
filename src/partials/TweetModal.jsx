@@ -17,7 +17,7 @@ function TweetModal({ show, handleClose }) {
       e.preventDefault();
       const response = await axios({
         headers: {
-          Authorization: `Bearer ${user.userToken}`,
+          Authorization: `Bearer ${user.token}`,
         },
         method: "POST",
         url: `${process.env.REACT_APP_API_URL}/tweets/`,
@@ -38,7 +38,9 @@ function TweetModal({ show, handleClose }) {
     >
       <Modal.Header closeButton>
         <Modal.Title>
-          <h2 className="text-center fs-4">Post Your Tweet 😉 </h2>
+          <h2 className="text-center" style={{ fontSize: "1.2rem" }}>
+            Post Your Tweet 😉{" "}
+          </h2>
         </Modal.Title>
       </Modal.Header>
       <div className="p-4">
@@ -50,9 +52,9 @@ function TweetModal({ show, handleClose }) {
                 className="figure-img img-fluid rounded-pill align-self-start"
                 alt="images"
                 src={
-                  user.userImage.includes("http")
-                    ? user.userImage
-                    : `${process.env.REACT_APP_API_URL}/img/${user.userImage}`
+                  user.image.includes("http")
+                    ? user.image
+                    : `${process.env.REACT_APP_API_URL}/img/${user.image}`
                 }
               />
             </div>
@@ -62,7 +64,7 @@ function TweetModal({ show, handleClose }) {
                 placeholder="What's happening?"
                 name="newTweet"
                 id="newTweet"
-                style={{ height: "100px" }}
+                style={{ height: "130px" }}
                 value={tweet}
                 onChange={(e) => setTweet(e.target.value)}
               />

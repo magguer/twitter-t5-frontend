@@ -7,23 +7,24 @@ const userSlice = createSlice({
   initialState,
   reducers: {
     login(state, action) {
-      return action.payload
+      return action.payload;
     },
     edit(state, action) {
-      state.userName = action.payload.username;
-      state.userFirstname = action.payload.firstname;
-      state.userLastname = action.payload.lastname;
+      state.username = action.payload.username;
+      state.firstname = action.payload.firstname;
+      state.lastname = action.payload.lastname;
     },
     follow(state, action) {
-      state.userFollowing.push(action.payload)
+      state.following.push(action.payload);
     },
     unfollow(state, action) {
-      const following = state.userFollowing.filter((user) => user.username !== action.payload.username)
-      return { ...state, userFollowing: following }
+      const following = state.following.filter(
+        (user) => user.username !== action.payload.username
+      );
+      return { ...state, following: following };
     },
     logOut(state, action) {
       return null;
-
     },
   },
 });

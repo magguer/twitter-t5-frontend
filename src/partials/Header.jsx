@@ -70,7 +70,7 @@ function Header() {
                 />
               </Link>
               {/*<!--       User Profile Anchor --> */}
-              <Link to={`/${user.userName}`}>
+              <Link to={`/${user.username}`}>
                 {" "}
                 {/*Originalmente iba a: /:username/<%= user.username */}
                 <img
