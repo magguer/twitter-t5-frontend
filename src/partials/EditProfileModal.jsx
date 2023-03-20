@@ -29,7 +29,7 @@ function EditProfileModal({ show, handleClose, userProfile }) {
       url: `${process.env.REACT_APP_API_URL}/usuarios/${userProfile._id}`,
       data: formData,
       headers: {
-        Authorization: `Bearer ${user.userToken}`,
+        Authorization: `Bearer ${user.token}`,
         "Content-Type": "multipart/form-data",
       },
     });
