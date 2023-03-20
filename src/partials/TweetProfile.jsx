@@ -11,7 +11,7 @@ function TweetProfile({ userProfile, tweet }) {
   const user = useSelector((state) => state.user);
 
   const tweetLiked = tweet.likes.some(
-    (like) => like.username === user.username
+    (like) => like.username === user.userName
   );
 
   // Delete de tweet
@@ -19,7 +19,7 @@ function TweetProfile({ userProfile, tweet }) {
     dispatch(actualize());
     await axios({
       headers: {
-        Authorization: `Bearer ${user.userToken}`,
+        Authorization: `Bearer ${user.token}`,
       },
       method: "DELETE",
       url: `http://localhost:8000/tweets/${tweet._id}`,
@@ -32,7 +32,7 @@ function TweetProfile({ userProfile, tweet }) {
     if (!tweetLiked) {
       await axios({
         headers: {
-          Authorization: `Bearer ${user.userToken}`,
+          Authorization: `Bearer ${user.token}`,
         },
         method: "PATCH",
         url: `http://localhost:8000/tweets/like/${tweet._id}`,
@@ -40,7 +40,7 @@ function TweetProfile({ userProfile, tweet }) {
     } else {
       await axios({
         headers: {
-          Authorization: `Bearer ${user.userToken}`,
+          Authorization: `Bearer ${user.token}`,
         },
         method: "PATCH",
         url: `http://localhost:8000/tweets/dislike/${tweet._id}`,
@@ -118,7 +118,7 @@ function TweetProfile({ userProfile, tweet }) {
                   {tweet.likes.length}
                 </h2>
               </button>
-              {user.userName === userProfile.username && (
+              {user.username === userProfile.username && (
                 <button
                   type="submit"
                   className="border border-white bg-white m-0 p-0 d-flex align-items-center"

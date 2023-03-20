@@ -27,7 +27,7 @@ function Profile() {
     dispatch(actualize());
     await axios({
       headers: {
-        Authorization: `Bearer ${user.userToken}`,
+        Authorization: `Bearer ${user.token}`,
       },
       method: "patch",
       url: `${process.env.REACT_APP_API_URL}/usuarios/${userProfile._id}/follow`,
@@ -40,7 +40,7 @@ function Profile() {
     dispatch(actualize());
     await axios({
       headers: {
-        Authorization: `Bearer ${user.userToken}`,
+        Authorization: `Bearer ${user.token}`,
       },
       method: "patch",
       url: `${process.env.REACT_APP_API_URL}/usuarios/${userProfile._id}/unfollow`,
@@ -51,14 +51,14 @@ function Profile() {
     const getProfile = async () => {
       const response = await axios({
         headers: {
-          Authorization: `Bearer ${user.userToken}`,
+          Authorization: `Bearer ${user.token}`,
         },
         method: "get",
         url: `${process.env.REACT_APP_API_URL}/usuarios/${userNameProfile.username}`,
       });
       setUserProfile(response.data.userProfile);
       setUserFollowing(
-        user.userFollowing.some((u) => u.username === userNameProfile.username)
+        user.following.some((u) => u.username === userNameProfile.username)
       );
     };
     // console.log(userProfile);
@@ -123,7 +123,7 @@ function Profile() {
             <section id="info-perfil" className="px-3">
               {/* Buttom Profile */}
               <div className="d-flex justify-content-end">
-                {userNameProfile.username !== user.userName ? (
+                {userNameProfile.username !== user.username ? (
                   userFollowing === false ? (
                     <button
                       type="submit"

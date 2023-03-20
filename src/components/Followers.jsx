@@ -17,7 +17,7 @@ function Followers() {
     const getFollowers = async () => {
       const response = await axios({
         headers: {
-          Authorization: `Bearer ${user.userToken}`,
+          Authorization: `Bearer ${user.token}`,
         },
         method: "get",
         url: `${process.env.REACT_APP_API_URL}/usuarios/${userProfile.username}/followers`,
