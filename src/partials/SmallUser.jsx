@@ -87,7 +87,7 @@ function SmallUser({ smallUser }) {
                 </p>
               </div>
             </div>
-            {/*  user.userFollowing.some((u) => u._id === smallUser._id) */}
+
             {!user.following.some((u) => u._id === smallUser._id) ? (
               <div className="justify-content-end">
                 <button
