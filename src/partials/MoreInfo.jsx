@@ -26,6 +26,18 @@ function MoreInfo() {
       <div className="sticky-top d-flex flex-column ps-3 pe-5 pt-3">
         {/* What's happening */}
         <div className="d-flex flex-column">
+          <div className="input-group mb-3">
+            <button className="input-group-text" id="basic-addon1">
+              <img src="https://svgur.com/i/rJP.svg" alt="" />
+            </button>
+            <input
+              type="text"
+              className="form-control"
+              placeholder="Search on Twitter..."
+              aria-label="Username"
+              aria-describedby="basic-addon1"
+            />
+          </div>
           <div
             style={{ backgroundColor: "#ededed" }}
             className="rounded-3 p-3 mb-3"

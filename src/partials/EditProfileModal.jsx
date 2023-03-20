@@ -40,7 +40,8 @@ function EditProfileModal({ show, handleClose, userProfile }) {
 
   return (
     <Modal
-      size="lg"
+      className="p-0"
+      size="md"
       aria-labelledby="contained-modal-title-vcenter"
       centered
       show={show}
@@ -48,33 +49,40 @@ function EditProfileModal({ show, handleClose, userProfile }) {
       animation={true}
     >
       <Modal.Header closeButton>
-        <Modal.Title>Edit User</Modal.Title>
+        <Modal.Title>
+          {" "}
+          <h2 className="text-center" style={{ fontSize: "1.3rem" }}>
+            Edit Profile
+          </h2>
+        </Modal.Title>
       </Modal.Header>
       <form onSubmit={patchUser}>
         <div className="p-4">
-          <div className="form-floating mb-3">
-            <input
-              onChange={(e) => setFirstname(e.target.value)}
-              type="firstname"
-              className="form-control"
-              id="firstname"
-              name="firstname"
-              placeholder="name@example.com"
-              value={firstname}
-            />
-            <label htmlFor="floatingInput">Firstname</label>
-          </div>
-          <div className="form-floating mb-3">
-            <input
-              onChange={(e) => setLastname(e.target.value)}
-              type="lastname"
-              className="form-control"
-              id="lastname"
-              name="lastname"
-              placeholder="name@example.com"
-              value={lastname}
-            />
-            <label htmlFor="floatingInput">Lastname</label>
+          <div className="d-flex w-100 justify-content-between">
+            <div className="form-floating mb-3">
+              <input
+                onChange={(e) => setFirstname(e.target.value)}
+                type="firstname"
+                className="form-control"
+                id="firstname"
+                name="firstname"
+                placeholder="name@example.com"
+                value={firstname}
+              />
+              <label htmlFor="floatingInput">Firstname</label>
+            </div>
+            <div className="form-floating mb-3">
+              <input
+                onChange={(e) => setLastname(e.target.value)}
+                type="lastname"
+                className="form-control"
+                id="lastname"
+                name="lastname"
+                placeholder="name@example.com"
+                value={lastname}
+              />
+              <label htmlFor="floatingInput">Lastname</label>
+            </div>
           </div>
           {/*           <div className="form-floating mb-3">
             <input
@@ -92,6 +100,7 @@ function EditProfileModal({ show, handleClose, userProfile }) {
             <textarea
               onChange={(e) => setDescription(e.target.value)}
               type="text"
+              style={{ height: "80px" }}
               className="form-control"
               id="description"
               name="description"
@@ -100,7 +109,40 @@ function EditProfileModal({ show, handleClose, userProfile }) {
             />
             <label htmlFor="floatingInput">Description</label>
           </div>
-          <hr />
+
+          <div className="d-flex align-items-center">
+            <div>
+              <label className="fw-semibold m-2" htmlFor="floatingInput">
+                Profile Image
+              </label>
+              <input
+                onChange={(e) => setImage(e.target.files[0])}
+                multiple
+                className="form-control"
+                name="image"
+                id="image"
+                type="file"
+              />
+            </div>
+            <div className="mt-3">
+              <img
+                className="rounded-pill ms-4 border border-5 border-white"
+                style={{
+                  height: "5rem",
+                  width: "5rem",
+                  borderStyle: "solid",
+                  borderColor: "white",
+                  objectFit: "cover",
+                }}
+                src={
+                  userProfile.image.includes("http")
+                    ? userProfile.image
+                    : `${process.env.REACT_APP_API_URL}/img/${userProfile.image}`
+                }
+                alt="img"
+              />
+            </div>
+          </div>
           <div className="mb-3">
             <label className="fw-semibold m-2" htmlFor="floatingInput">
               Banner
@@ -111,19 +153,6 @@ function EditProfileModal({ show, handleClose, userProfile }) {
               className="form-control"
               name="banner"
               id="banner"
-              type="file"
-            />
-          </div>
-          <div className="mb-3">
-            <label className="fw-semibold m-2" htmlFor="floatingInput">
-              Profile Image
-            </label>
-            <input
-              onChange={(e) => setImage(e.target.files[0])}
-              multiple
-              className="form-control"
-              name="image"
-              id="image"
               type="file"
             />
           </div>

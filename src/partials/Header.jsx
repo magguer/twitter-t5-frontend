@@ -64,8 +64,9 @@ function Header() {
               {/*<!--       Home Anchor --> */}
               <Link to={"/"}>
                 <img
-                  style={{ width: "40px" }}
-                  src="https://www.shareicon.net/data/512x512/2017/05/26/886463_home_512x512.png"
+                  className="mt-1"
+                  style={{ width: "30px" }}
+                  src="https://svgur.com/i/rFm.svg"
                   alt="home_icon"
                 />
               </Link>

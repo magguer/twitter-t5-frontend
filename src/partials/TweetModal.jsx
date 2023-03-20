@@ -38,7 +38,7 @@ function TweetModal({ show, handleClose }) {
     >
       <Modal.Header closeButton>
         <Modal.Title>
-          <h2 className="text-center" style={{ fontSize: "1.2rem" }}>
+          <h2 className="text-center" style={{ fontSize: "1.1rem" }}>
             Post Your Tweet 😉{" "}
           </h2>
         </Modal.Title>
@@ -46,9 +46,13 @@ function TweetModal({ show, handleClose }) {
       <div className="p-4">
         <form>
           <div className="d-flex">
-            <div className="me-2">
+            <div className="me-3">
               <img
-                style={{ width: "4rem", height: "3.5rem", objectFit: "cover" }}
+                style={{
+                  width: "3.5rem",
+                  height: "3rem",
+                  objectFit: "cover",
+                }}
                 className="figure-img img-fluid rounded-pill align-self-start"
                 alt="images"
                 src={
@@ -64,7 +68,7 @@ function TweetModal({ show, handleClose }) {
                 placeholder="What's happening?"
                 name="newTweet"
                 id="newTweet"
-                style={{ height: "130px" }}
+                style={{ height: "90px" }}
                 value={tweet}
                 onChange={(e) => setTweet(e.target.value)}
               />

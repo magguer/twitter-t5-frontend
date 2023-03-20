@@ -107,12 +107,12 @@ function Profile() {
             ></div>
           )}
           {/* Avatar */}
-          <div style={{ position: "relative", top: "-110px" }}>
+          <div style={{ position: "relative", top: "-115px" }}>
             <img
-              className="rounded-pill position-absolute ms-3 border border-5 border-white"
+              className="rounded-pill position-absolute ms-4 border border-5 border-white"
               style={{
-                height: "7rem",
-                width: "7rem",
+                height: "8rem",
+                width: "8rem",
                 top: "55px",
                 borderStyle: "solid",
                 borderColor: "white",
