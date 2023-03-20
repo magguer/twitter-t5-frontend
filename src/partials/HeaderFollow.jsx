@@ -8,9 +8,9 @@ function HeaderFollow({ userProfile }) {
       <div className="px-3 pt-3">
         {/* <!--           Flecha Atrás --> */}
         <div className="d-flex align-items-center mt-4">
-          <button onClick={() => navigate(-1)} className="btn text-black fs-4">
+          <Link to={`/${userProfile.username}`} className="btn text-black fs-4">
             🡠
-          </button>
+          </Link>
           <div className="d-flex align-items-start flex-column ms-4">
             <h5 className="mb-0">
               {userProfile.firstname} {userProfile.lastname}

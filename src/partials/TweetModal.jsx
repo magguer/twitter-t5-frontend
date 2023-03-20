@@ -38,7 +38,9 @@ function TweetModal({ show, handleClose }) {
     >
       <Modal.Header closeButton>
         <Modal.Title>
-          <h2 className="text-center fs-4">Post Your Tweet 😉 </h2>
+          <h2 className="text-center" style={{ fontSize: "1.2rem" }}>
+            Post Your Tweet 😉{" "}
+          </h2>
         </Modal.Title>
       </Modal.Header>
       <div className="p-4">
@@ -62,7 +64,7 @@ function TweetModal({ show, handleClose }) {
                 placeholder="What's happening?"
                 name="newTweet"
                 id="newTweet"
-                style={{ height: "100px" }}
+                style={{ height: "130px" }}
                 value={tweet}
                 onChange={(e) => setTweet(e.target.value)}
               />
