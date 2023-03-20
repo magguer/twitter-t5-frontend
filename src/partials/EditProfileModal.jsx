@@ -13,6 +13,7 @@ function EditProfileModal({ show, handleClose, userProfile }) {
   const [lastname, setLastname] = useState(userProfile.lastname);
   const [description, setDescription] = useState(userProfile.description);
   const [banner, setBanner] = useState(null);
+  const [image, setImage] = useState(null);
 
   const patchUser = async (e) => {
     dispatch(edit({ username, firstname, lastname }));
@@ -22,6 +23,7 @@ function EditProfileModal({ show, handleClose, userProfile }) {
     formData.append("lastname", lastname);
     formData.append("banner", banner);
     formData.append("description", description);
+    formData.append("image", image);
     /*     formData.append("username", username); */
     e.preventDefault();
     await axios({
@@ -109,6 +111,19 @@ function EditProfileModal({ show, handleClose, userProfile }) {
               className="form-control"
               name="banner"
               id="banner"
+              type="file"
+            />
+          </div>
+          <div className="mb-3">
+            <label className="fw-semibold m-2" htmlFor="floatingInput">
+              Profile Image
+            </label>
+            <input
+              onChange={(e) => setImage(e.target.files[0])}
+              multiple
+              className="form-control"
+              name="image"
+              id="image"
               type="file"
             />
           </div>
