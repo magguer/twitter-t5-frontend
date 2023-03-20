@@ -27,7 +27,7 @@ function Login() {
       response.data === "La pass es inválida" ||
       response.data === "Rellene todos los campos."
     ) {
-      setError("Credenciales incorrectas.");
+      setError("Wrong credentials.");
     } else {
       const user = response.data;
       dispatch(login(user));
@@ -93,23 +93,39 @@ function Login() {
                 />
                 <label htmlFor="floatingPassword">Password</label>
               </div>
-              <p style={{ fontSize: "13px" }}>{error}</p>
-              <div className="d-grid gap-1 my-5">
+              <h3
+                style={{
+                  color: "red",
+                  fontSize: "15px",
+                  position: "absolute",
+                  marginTop: "10px",
+                }}
+              >
+                {error}
+              </h3>
+              <div className="d-grid gap-1 mt-5 mb-4">
                 <button
-                  className="btn text-light"
+                  className="btn text-light fw-semibold"
                   style={{ borderRadius: "45px", backgroundColor: "#1d9bf0" }}
                   type="submit"
                 >
                   Login
                 </button>
               </div>
-              <div className="my-5 text-center">
+              <hr />
+              <div className="mb-5 text-center">
                 <Link
                   to="/register"
-                  className="text-decoration-none text-dark fw-semibold"
+                  className="text-decoration-none text-dark fw-semibold d-flex align-items-center gap-3"
                   role="button"
                 >
-                  Don't have an account? Sign Up.
+                  Don't have an account?{" "}
+                  <button
+                    style={{ borderRadius: "45px", backgroundColor: "#1d9bf0" }}
+                    className="btn text-white fw-semibold"
+                  >
+                    Sign up
+                  </button>
                 </Link>
               </div>
             </form>

@@ -62,11 +62,22 @@ function SmallUser({ smallUser }) {
               <div>
                 <Link
                   to={`/${smallUser.username}`}
-                  className="text-decoration-none text-black"
+                  className="text-decoration-none text-black d-flex gap-2 align-items-center"
                 >
                   <h6 className="mb-0 p-0">
                     {smallUser.firstname} {smallUser.lastname}
                   </h6>
+                  {smallUser.verify && (
+                    <img
+                      style={{
+                        width: "15px",
+                        height: "15px",
+                        marginTop: "3px",
+                      }}
+                      src="https://i.ibb.co/mDVVXN2/Twitter-Verified-Badge.png"
+                      alt=""
+                    />
+                  )}
                 </Link>
                 <p
                   className="p-0 m-0"
