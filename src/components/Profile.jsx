@@ -16,6 +16,10 @@ function Profile() {
   const dispatch = useDispatch();
   const [userFollowing, setUserFollowing] = useState(null);
 
+  useEffect(() => {
+    document.title = `Twitter | ${userNameProfile.username}`;
+  }, [userNameProfile]);
+
   const [show, setShow] = useState(false);
 
   const handleClose = () => setShow(false);
@@ -78,18 +82,21 @@ function Profile() {
           </div>
           {/* Banner Azul como el mar */}
           {userProfile.banner ? (
-            <div
-              style={{
-                backgroundImage: `url(${
+            <div>
+              <img
+                src={`${
                   userProfile.banner.includes("http")
                     ? userProfile.banner
                     : `${process.env.REACT_APP_API_URL}/img/${userProfile.banner}`
-                })`,
-                height: "10rem",
-                width: "100%",
-                objectFit: "cover",
-              }}
-            ></div>
+                }`}
+                alt=""
+                style={{
+                  height: "10rem",
+                  width: "100%",
+                  objectFit: "cover",
+                }}
+              />
+            </div>
           ) : (
             <div
               style={{
@@ -109,6 +116,7 @@ function Profile() {
                 top: "55px",
                 borderStyle: "solid",
                 borderColor: "white",
+                objectFit: "cover",
               }}
               src={
                 userProfile.image.includes("http")
@@ -171,31 +179,32 @@ function Profile() {
                     <small style={{ color: "#969696", fontWeight: "400" }}>
                       @{userProfile.username}
                     </small>
-                  </div>
-                  <div className="ms-auto d-flex align-items-center gap-3">
-                    <div className="d-flex align-items-center gap-2">
-                      <small style={{ fontWeight: "700", color: "#000000" }}>
-                        {userProfile.followers.length}
-                      </small>
-                      <Link
-                        className="text-decoration-none"
-                        to={`http://localhost:3000/${userProfile.username}/followers`}
-                        style={{ color: "#647788" }}
-                      >
-                        Followers
-                      </Link>
-                    </div>
-                    <div className="d-flex align-items-center gap-2">
-                      <small style={{ fontWeight: "700", color: "#000000" }}>
-                        {userProfile.following.length}
-                      </small>
-                      <Link
-                        className="text-decoration-none"
-                        to={`http://localhost:3000/${userProfile.username}/following`}
-                        style={{ color: "#647788" }}
-                      >
-                        Following
-                      </Link>
+                    <p className="pe-2 mt-2">{userProfile.description}</p>
+                    <div className="ms-auto d-flex align-items-center gap-3">
+                      <div className="d-flex align-items-center gap-2">
+                        <small style={{ fontWeight: "700", color: "#000000" }}>
+                          {userProfile.followers.length}
+                        </small>
+                        <Link
+                          className="text-decoration-none"
+                          to={`http://localhost:3000/${userProfile.username}/followers`}
+                          style={{ color: "#647788" }}
+                        >
+                          Followers
+                        </Link>
+                      </div>
+                      <div className="d-flex align-items-center gap-2">
+                        <small style={{ fontWeight: "700", color: "#000000" }}>
+                          {userProfile.following.length}
+                        </small>
+                        <Link
+                          className="text-decoration-none"
+                          to={`http://localhost:3000/${userProfile.username}/following`}
+                          style={{ color: "#647788" }}
+                        >
+                          Following
+                        </Link>
+                      </div>
                     </div>
                   </div>
                 </div>

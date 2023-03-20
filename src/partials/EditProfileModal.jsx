@@ -11,6 +11,7 @@ function EditProfileModal({ show, handleClose, userProfile }) {
   const [username, setUsername] = useState(userProfile.username);
   const [firstname, setFirstname] = useState(userProfile.firstname);
   const [lastname, setLastname] = useState(userProfile.lastname);
+  const [description, setDescription] = useState(userProfile.description);
   const [banner, setBanner] = useState(null);
 
   const patchUser = async (e) => {
@@ -20,6 +21,7 @@ function EditProfileModal({ show, handleClose, userProfile }) {
     formData.append("firstname", firstname);
     formData.append("lastname", lastname);
     formData.append("banner", banner);
+    formData.append("description", description);
     /*     formData.append("username", username); */
     e.preventDefault();
     await axios({
@@ -44,7 +46,7 @@ function EditProfileModal({ show, handleClose, userProfile }) {
       animation={true}
     >
       <Modal.Header closeButton>
-        <Modal.Title>Editar Usuario</Modal.Title>
+        <Modal.Title>Edit User</Modal.Title>
       </Modal.Header>
       <form onSubmit={patchUser}>
         <div className="p-4">
@@ -58,7 +60,7 @@ function EditProfileModal({ show, handleClose, userProfile }) {
               placeholder="name@example.com"
               value={firstname}
             />
-            <label htmlFor="floatingInput">Nombre</label>
+            <label htmlFor="floatingInput">Firstname</label>
           </div>
           <div className="form-floating mb-3">
             <input
@@ -70,7 +72,7 @@ function EditProfileModal({ show, handleClose, userProfile }) {
               placeholder="name@example.com"
               value={lastname}
             />
-            <label htmlFor="floatingInput">Apellido</label>
+            <label htmlFor="floatingInput">Lastname</label>
           </div>
           {/*           <div className="form-floating mb-3">
             <input
@@ -84,7 +86,23 @@ function EditProfileModal({ show, handleClose, userProfile }) {
             />
             <label htmlFor="floatingInput">Username</label>
           </div> */}
+          <div className="form-floating mb-3">
+            <textarea
+              onChange={(e) => setDescription(e.target.value)}
+              type="text"
+              className="form-control"
+              id="description"
+              name="description"
+              placeholder="name@example.com"
+              value={description}
+            />
+            <label htmlFor="floatingInput">Description</label>
+          </div>
+          <hr />
           <div className="mb-3">
+            <label className="fw-semibold m-2" htmlFor="floatingInput">
+              Banner
+            </label>
             <input
               onChange={(e) => setBanner(e.target.files[0])}
               multiple
@@ -101,14 +119,14 @@ function EditProfileModal({ show, handleClose, userProfile }) {
             style={{ background: "red", color: "white" }}
             onClick={handleClose}
           >
-            Cerrar
+            Close
           </button>
           <button
             className="btn"
             style={{ background: "#1d9bf0", color: "white" }}
             onClick={handleClose}
           >
-            Guardar Cambios
+            Save
           </button>
         </div>
       </form>

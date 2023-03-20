@@ -9,13 +9,12 @@ const tweetsSlice = createSlice({
         getTweets(state, action) {
             return action.payload
         },
-        postTweet(state,action) {
-            state.unshift({...action.payload.newTweet, user: action.payload.user})
+        postTweet(state, action) {
+            state.unshift({ ...action.payload.newTweet, user: action.payload.user })
         },
-        deleteTweet(state,action) {
+        deleteTweet(state, action) {
             return state.filter((tweet) => tweet._id !== action.payload._id)
         },
-
         /*  likeTweet(state, action){
             console.log(action.payload)
             console.log(state.like)

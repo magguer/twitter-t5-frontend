@@ -9,6 +9,8 @@ import { formatDistance } from "date-fns";
 function Tweet({ tweet }) {
   const dispatch = useDispatch();
   const user = useSelector((state) => state.user);
+  /* 
+  const tweetLiked = true; */
 
   const tweetLiked = tweet.likes.some(
     (like) => like.username === user.username
@@ -111,7 +113,11 @@ function Tweet({ tweet }) {
                   alt="heart-white"
                 />
                 <h2
-                  style={{ fontSize: "1rem", color: "#000000" }}
+                  style={{
+                    fontSize: "0.9rem",
+                    color: "#000000",
+                    fontWeight: "400",
+                  }}
                   className="m-0"
                 >
                   {tweet.likes.length}

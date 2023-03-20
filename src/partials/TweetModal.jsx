@@ -46,7 +46,7 @@ function TweetModal({ show, handleClose }) {
           <div className="d-flex">
             <div className="me-2">
               <img
-                style={{ width: "3rem" }}
+                style={{ width: "4rem", height: "3.5rem", objectFit: "cover" }}
                 className="figure-img img-fluid rounded-pill align-self-start"
                 alt="images"
                 src={

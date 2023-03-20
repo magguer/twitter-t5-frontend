@@ -11,6 +11,10 @@ function Home() {
   const tweets = useSelector((state) => state.tweets);
   const [tweet, setTweet] = useState("");
 
+  useEffect(() => {
+    document.title = `Twitter | Home`;
+  }, []);
+
   //Get de tweets
   useEffect(() => {
     const getHome = async () => {
@@ -50,7 +54,7 @@ function Home() {
         <h5 className="my-4">Home</h5>
         <div className="me-3 d-flex gap-3">
           <img
-            style={{ width: "4rem" }}
+            style={{ width: "4rem", height: "3.5rem", objectFit: "cover" }}
             className="figure-img img-fluid rounded-pill align-self-start"
             alt="images"
             src={
