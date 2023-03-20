@@ -11,6 +11,10 @@ function Home() {
   const tweets = useSelector((state) => state.tweets);
   const [tweet, setTweet] = useState("");
 
+  useEffect(() => {
+    document.title = `Twitter | Home`;
+  }, []);
+
   //Get de tweets
   useEffect(() => {
     const getHome = async () => {
@@ -38,7 +42,6 @@ function Home() {
         url: `${process.env.REACT_APP_API_URL}/tweets/`,
         data: { tweet: tweet },
       });
-      console.log(response.data);
       dispatch(postTweet(response.data));
     }
     setTweet("");

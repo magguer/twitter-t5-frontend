@@ -16,6 +16,10 @@ function Profile() {
   const dispatch = useDispatch();
   const [userFollowing, setUserFollowing] = useState(null);
 
+  useEffect(() => {
+    document.title = `Twitter | ${userNameProfile.username}`;
+  }, [userNameProfile]);
+
   const [show, setShow] = useState(false);
 
   const handleClose = () => setShow(false);
@@ -78,18 +82,21 @@ function Profile() {
           </div>
           {/* Banner Azul como el mar */}
           {userProfile.banner ? (
-            <div
-              style={{
-                backgroundImage: `url(${
+            <div>
+              <img
+                src={`${
                   userProfile.banner.includes("http")
                     ? userProfile.banner
                     : `${process.env.REACT_APP_API_URL}/img/${userProfile.banner}`
-                })`,
-                height: "10rem",
-                width: "100%",
-                objectFit: "cover",
-              }}
-            ></div>
+                }`}
+                alt=""
+                style={{
+                  height: "10rem",
+                  width: "100%",
+                  objectFit: "cover",
+                }}
+              />
+            </div>
           ) : (
             <div
               style={{
