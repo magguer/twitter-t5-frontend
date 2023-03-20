@@ -87,31 +87,45 @@ function SmallUser({ smallUser }) {
                 </p>
               </div>
             </div>
-
-            {!user.following.some((u) => u._id === smallUser._id) ? (
-              <div className="justify-content-end">
-                <button
-                  onClick={getFollow}
-                  type="submit"
-                  className="btn rounded-pill"
-                  style={{ backgroundColor: "#1d9bf0", color: "white" }}
-                >
-                  Follow
-                </button>
-              </div>
+            {user.username !== smallUser.username ? (
+              !user.following.some((u) => u._id === smallUser._id) ? (
+                <div className="justify-content-end">
+                  <button
+                    onClick={getFollow}
+                    type="submit"
+                    className="btn rounded-pill"
+                    style={{ backgroundColor: "#1d9bf0", color: "white" }}
+                  >
+                    Follow
+                  </button>
+                </div>
+              ) : (
+                /*  Si el usuario ya lo sigue, mostrar el boton de unfollow */
+                <div className="justify-content-end">
+                  <button
+                    onClick={getUnFollow}
+                    type="submit"
+                    className="btn rounded-pill border"
+                    style={{
+                      backgroundColor: "#ffffff",
+                      color: "rgb(0, 0, 0)",
+                    }}
+                  >
+                    Following
+                  </button>
+                </div>
+                /* )} */
+              )
             ) : (
-              /*  Si el usuario ya lo sigue, mostrar el boton de unfollow */
               <div className="justify-content-end">
                 <button
-                  onClick={getUnFollow}
                   type="submit"
-                  className="btn rounded-pill border"
+                  className="btn rounded-pill border px-3"
                   style={{ backgroundColor: "#ffffff", color: "rgb(0, 0, 0)" }}
                 >
-                  Following
+                  You
                 </button>
               </div>
-              /* )} */
             )}
           </div>
         </>
