@@ -54,7 +54,7 @@ function MoreInfo() {
                 >
                   Trend in Germany
                 </small>
-                <h4 className="fs-6 mb-0">#HerniIsComing</h4>
+                <h4 className="fs-6 mb-0">#Herni_Is_Coming</h4>
                 <small
                   style={{
                     fontSize: "0.7rem",
@@ -105,69 +105,6 @@ function MoreInfo() {
                   }}
                 >
                   87.9K Tweets
-                </small>
-              </div>
-              <div className="d-flex flex-column">
-                <small
-                  style={{
-                    fontSize: "0.7rem",
-                    color: "#969696",
-                    fontWeight: 500,
-                  }}
-                >
-                  Programming · Trending
-                </small>
-                <h4 className="fs-6 mb-0">#MongoVsSequelize</h4>
-                <small
-                  style={{
-                    fontSize: "0.7rem",
-                    color: "#969696",
-                    fontWeight: 500,
-                  }}
-                >
-                  56.5K Tweets
-                </small>
-              </div>
-              <div className="d-flex flex-column">
-                <small
-                  style={{
-                    fontSize: "0.7rem",
-                    color: "#969696",
-                    fontWeight: 500,
-                  }}
-                >
-                  IA · Trending
-                </small>
-                <h4 className="fs-6 mb-0">#BingVsBard</h4>
-                <small
-                  style={{
-                    fontSize: "0.7rem",
-                    color: "#969696",
-                    fontWeight: 500,
-                  }}
-                >
-                  55.2K Tweets
-                </small>
-              </div>
-              <div className="d-flex flex-column">
-                <small
-                  style={{
-                    fontSize: "0.7rem",
-                    color: "#969696",
-                    fontWeight: 500,
-                  }}
-                >
-                  Cash · Trending
-                </small>
-                <h4 className="fs-6 mb-0">#ElonMuskUnPoroto</h4>
-                <small
-                  style={{
-                    fontSize: "0.7rem",
-                    color: "#969696",
-                    fontWeight: 500,
-                  }}
-                >
-                  45.8K Tweets
                 </small>
               </div>
             </div>
