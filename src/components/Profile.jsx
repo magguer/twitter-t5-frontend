@@ -171,9 +171,18 @@ function Profile() {
 
               {/* Nombre, Username y seguidores*/}
               <div className="mt-4">
-                <h3 className="ms-3 mb-0">
-                  {userProfile.firstname} {userProfile.lastname}
-                </h3>
+                <div className="d-flex align-items-center gap-2 ms-3">
+                  <h3 className="mb-0">
+                    {userProfile.firstname} {userProfile.lastname}
+                  </h3>
+                  {userProfile.verify && (
+                    <img
+                      style={{ width: "25px", marginTop: "5px" }}
+                      src="https://i.ibb.co/mDVVXN2/Twitter-Verified-Badge.png"
+                      alt=""
+                    />
+                  )}
+                </div>
                 <div className="d-flex pb-3">
                   <div className="ms-3">
                     <small style={{ color: "#969696", fontWeight: "400" }}>

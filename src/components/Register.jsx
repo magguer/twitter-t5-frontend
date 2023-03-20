@@ -26,18 +26,17 @@ function Register() {
     formData.append("email", email);
     formData.append("username", username);
     formData.append("password", password);
-
     const response = await axios({
       method: "POST",
       url: `${process.env.REACT_APP_API_URL}/usuarios/users`,
       data: formData,
       headers: { "Content-Type": "multipart/form-data" },
     });
-
-    if (response.data === "Rellena todos los campos.") {
-      setError("Rellena todos los campos");
-    } else if (response.data === "El usuario ya existe.") {
-      setError("El usuario ya existe");
+    console.log(response.data);
+    if (response.data === "Fill all the fields.") {
+      setError("Fill all the fields.");
+    } else if (response.data === "User already exist.") {
+      setError("User already exist.");
     } else {
       const response = await axios.post(
         `${process.env.REACT_APP_API_URL}/usuarios/tokens`,
@@ -56,7 +55,7 @@ function Register() {
   return (
     <div
       className="text-emphasis-primary"
-      style={{ backgroundColor: "#065990", height: "100vh" }}
+      style={{ backgroundColor: "#065990" }}
     >
       <div className="container py-5">
         <div className="row g-0 shadow overflow-hidden rounded shadow">
@@ -155,23 +154,43 @@ function Register() {
                   />
                   <label htmlFor="floatingPassword">Password</label>
                 </div>
-                <h3>{error}</h3>
-                <div className="d-grid gap-1 my-5">
+                <h3
+                  style={{
+                    color: "red",
+                    fontSize: "15px",
+                    position: "absolute",
+                    marginTop: "10px",
+                  }}
+                >
+                  {error}
+                </h3>
+                <div className="d-grid gap-1 mt-5 mb-4">
                   <button
-                    className="btn text-light"
+                    className="btn text-light  fw-semibold"
                     style={{ borderRadius: "45px", backgroundColor: "#1d9bf0" }}
                     type="submit"
                   >
                     Sign up
                   </button>
                 </div>
-                <div className="my-5 text-center">
+                <hr />
+                <div className="mb-5 d-flex justify-content-center ">
                   <Link
                     to="/login"
-                    className="text-decoration-none text-dark fw-semibold"
+                    className="text-decoration-none text-dark d-flex  fw-semibold  gap-2 align-items-center"
                     role="button"
                   >
-                    Already have an account? Sign in.
+                    Already have an account?
+                    <button
+                      className="btn text-light  fw-semibold"
+                      style={{
+                        borderRadius: "45px",
+                        backgroundColor: "#1d9bf0",
+                      }}
+                      type="submit"
+                    >
+                      Sign in
+                    </button>
                   </Link>
                 </div>
               </div>

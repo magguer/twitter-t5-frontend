@@ -72,12 +72,25 @@ function Tweet({ tweet }) {
             {/* LINK  usuario */}
           </div>
           <div className="">
-            <div className="d-flex gap-2 align-items-center">
+            <div className="d-flex gap-1 align-items-center">
               <Link
                 to={`/${tweet.user.username}`}
                 className="text-decoration-none text-black fw-semibold mb-0 p-0"
               >
-                {tweet.user.firstname} {tweet.user.lastname}
+                <div className="d-flex gap-1 align-items-center">
+                  {tweet.user.firstname} {tweet.user.lastname}
+                  {tweet.user.verify && (
+                    <img
+                      style={{
+                        width: "15px",
+                        height: "15px",
+                        marginTop: "3px",
+                      }}
+                      src="https://i.ibb.co/mDVVXN2/Twitter-Verified-Badge.png"
+                      alt=""
+                    />
+                  )}
+                </div>
               </Link>
 
               <small
@@ -90,7 +103,7 @@ function Tweet({ tweet }) {
                 className="p-0 m-0"
                 style={{ fontSize: "0.8rem", color: "#969696" }}
               >
-                {formatDistance(new Date(tweet.createdAt), new Date())}
+                • {formatDistance(new Date(tweet.createdAt), new Date())}
               </small>
             </div>
             <p className="mb-2">{tweet.text}</p>

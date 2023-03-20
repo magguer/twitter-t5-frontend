@@ -12,6 +12,7 @@ function EditProfileModal({ show, handleClose, userProfile }) {
   const [firstname, setFirstname] = useState(userProfile.firstname);
   const [lastname, setLastname] = useState(userProfile.lastname);
   const [description, setDescription] = useState(userProfile.description);
+  const [verify, setVerify] = useState(userProfile.verify);
   const [banner, setBanner] = useState(null);
   const [image, setImage] = useState(null);
 
@@ -24,6 +25,7 @@ function EditProfileModal({ show, handleClose, userProfile }) {
     formData.append("banner", banner);
     formData.append("description", description);
     formData.append("image", image);
+    formData.append("verify", verify);
     /*     formData.append("username", username); */
     e.preventDefault();
     await axios({
@@ -36,6 +38,10 @@ function EditProfileModal({ show, handleClose, userProfile }) {
       },
     });
     /*    window.history.replaceState(null, `${username}`, `/${username}`); */
+  };
+
+  const handleVerify = () => {
+    setVerify(!verify);
   };
 
   return (
@@ -57,7 +63,8 @@ function EditProfileModal({ show, handleClose, userProfile }) {
         </Modal.Title>
       </Modal.Header>
       <form onSubmit={patchUser}>
-        <div className="p-4">
+        <div className="pt-4 px-4">
+          {/*   User Info */}
           <div className="d-flex w-100 justify-content-between">
             <div className="form-floating mb-3">
               <input
@@ -84,19 +91,7 @@ function EditProfileModal({ show, handleClose, userProfile }) {
               <label htmlFor="floatingInput">Lastname</label>
             </div>
           </div>
-          {/*           <div className="form-floating mb-3">
-            <input
-              onChange={(e) => setUsername(e.target.value)}
-              type="username"
-              className="form-control"
-              id="username"
-              name="username"
-              placeholder="name@example.com"
-              value={username}
-            />
-            <label htmlFor="floatingInput">Username</label>
-          </div> */}
-          <div className="form-floating mb-3">
+          <div className="form-floating">
             <textarea
               onChange={(e) => setDescription(e.target.value)}
               type="text"
@@ -109,7 +104,7 @@ function EditProfileModal({ show, handleClose, userProfile }) {
             />
             <label htmlFor="floatingInput">Description</label>
           </div>
-
+          {/*   Images Info */}
           <div className="d-flex align-items-center">
             <div>
               <label className="fw-semibold m-2" htmlFor="floatingInput">
@@ -124,7 +119,7 @@ function EditProfileModal({ show, handleClose, userProfile }) {
                 type="file"
               />
             </div>
-            <div className="mt-3">
+            <div className="mt-2">
               <img
                 className="rounded-pill ms-4 border border-5 border-white"
                 style={{
@@ -143,8 +138,8 @@ function EditProfileModal({ show, handleClose, userProfile }) {
               />
             </div>
           </div>
-          <div className="mb-3">
-            <label className="fw-semibold m-2" htmlFor="floatingInput">
+          <div className="mb-2">
+            <label className="fw-semibold ms-2 mb-2" htmlFor="floatingInput">
               Banner
             </label>
             <input
@@ -156,6 +151,40 @@ function EditProfileModal({ show, handleClose, userProfile }) {
               type="file"
             />
           </div>
+          {/*   Verify Info */}
+          {!verify ? (
+            <div className="w-100 d-flex mt-4 justify-content-center align-items-center gap-4">
+              <button
+                onClick={handleVerify}
+                style={{ background: "#1d9bf0", color: "white" }}
+                className="btn"
+              >
+                Verify
+              </button>
+              <h3
+                className="m-0"
+                style={{ fontSize: "1rem", fontWeight: "500" }}
+              >
+                Verify your account for only $29.99
+              </h3>
+            </div>
+          ) : (
+            <div className="w-100 d-flex mt-4 justify-content-center align-items-center gap-4">
+              <button
+                onClick={handleVerify}
+                style={{ background: "red", color: "white" }}
+                className="btn"
+              >
+                Unverify
+              </button>
+              <h3
+                className="m-0"
+                style={{ fontSize: "1rem", fontWeight: "500" }}
+              >
+                Cancel your verify profile.
+              </h3>
+            </div>
+          )}
         </div>
         <div className="p-4 d-flex gap-2 w-100 justify-content-end">
           <button
