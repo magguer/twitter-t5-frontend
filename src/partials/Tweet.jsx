@@ -56,7 +56,7 @@ function Tweet({ tweet }) {
       <div className="d-flex w-100 p-3 border-top border-succes gap-3">
         <Link to={`/${tweet.user.username}`}>
           <img
-            style={{ width: "2.5rem" }}
+            style={{ width: "2.5rem", height: "2.5rem", objectFit: "cover" }}
             className="figure-img img-fluid rounded-pill align-self-start"
             alt="img"
             src={
