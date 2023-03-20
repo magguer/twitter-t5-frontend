@@ -20,7 +20,7 @@ function Home() {
     const getHome = async () => {
       const response = await axios({
         headers: {
-          Authorization: `Bearer ${user.userToken}`,
+          Authorization: `Bearer ${user.token}`,
         },
         method: "get",
         url: `${process.env.REACT_APP_API_URL}/tweets`,
@@ -36,7 +36,7 @@ function Home() {
       e.preventDefault();
       const response = await axios({
         headers: {
-          Authorization: `Bearer ${user.userToken}`,
+          Authorization: `Bearer ${user.token}`,
         },
         method: "POST",
         url: `${process.env.REACT_APP_API_URL}/tweets/`,
@@ -58,9 +58,9 @@ function Home() {
             className="figure-img img-fluid rounded-pill align-self-start"
             alt="images"
             src={
-              user.userImage.includes("http")
-                ? user.userImage
-                : `${process.env.REACT_APP_API_URL}/img/${user.userImage}`
+              user.image.includes("http")
+                ? user.image
+                : `${process.env.REACT_APP_API_URL}/img/${user.image}`
             }
           />
           <div className="w-100 d-flex flex-column align-items-end gap-3">
@@ -68,7 +68,7 @@ function Home() {
               <textarea
                 className="form-control"
                 placeholder="What's happening?"
-                name="newTweet"
+                name="newTweet" // tweetSlice
                 id="newTweet"
                 style={{ height: "100px" }}
                 value={tweet}

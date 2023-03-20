@@ -13,7 +13,7 @@ function MoreInfo() {
       const response = await axios({
         method: "get",
         headers: {
-          Authorization: `Bearer ${user.userToken}`,
+          Authorization: `Bearer ${user.token}`,
         },
         url: `${process.env.REACT_APP_API_URL}/usuarios/random`,
       });
@@ -103,7 +103,7 @@ function MoreInfo() {
             <div className="pt-2 px-3">
               <h3 className="fs-5 fw-bold">Who to follow</h3>
             </div>
-            {user.userId !== users.id
+            {user.id !== users.id
               ? users.map((user, i) => {
                   return <SmallUser key={i} smallUser={user} />;
                 })

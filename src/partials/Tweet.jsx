@@ -13,14 +13,14 @@ function Tweet({ tweet }) {
   const tweetLiked = true; */
 
   const tweetLiked = tweet.likes.some(
-    (like) => like.username === user.userName
+    (like) => like.username === user.username
   );
 
   // Delete de tweet
   const handleDeleteTweet = async () => {
     await axios({
       headers: {
-        Authorization: `Bearer ${user.userToken}`,
+        Authorization: `Bearer ${user.token}`,
       },
       method: "DELETE",
       url: `http://localhost:8000/tweets/${tweet._id}`,
@@ -35,7 +35,7 @@ function Tweet({ tweet }) {
     if (!tweetLiked) {
       await axios({
         headers: {
-          Authorization: `Bearer ${user.userToken}`,
+          Authorization: `Bearer ${user.token}`,
         },
         method: "PATCH",
         url: `http://localhost:8000/tweets/like/${tweet._id}`,
@@ -43,7 +43,7 @@ function Tweet({ tweet }) {
     } else {
       await axios({
         headers: {
-          Authorization: `Bearer ${user.userToken}`,
+          Authorization: `Bearer ${user.token}`,
         },
         method: "PATCH",
         url: `http://localhost:8000/tweets/dislike/${tweet._id}`,
@@ -105,8 +105,8 @@ function Tweet({ tweet }) {
                 <img
                   src={
                     tweetLiked
-                      ? "https://svgur.com/i/qen.svg"
-                      : "https://cdn-icons-png.flaticon.com/512/2961/2961957.png"
+                      ? "https://svgur.com/i/qen.svg" //boton rojo
+                      : "https://cdn-icons-png.flaticon.com/512/2961/2961957.png" // boton blanco
                   }
                   className="img-fluid object-fit"
                   style={{ width: "1rem" }}
@@ -123,7 +123,7 @@ function Tweet({ tweet }) {
                   {tweet.likes.length}
                 </h2>
               </button>
-              {user.userName === tweet.user.username && (
+              {user.username === tweet.user.username && (
                 <button
                   type="submit"
                   className="border border-white bg-white m-0 p-0 d-flex align-items-center me-3"
