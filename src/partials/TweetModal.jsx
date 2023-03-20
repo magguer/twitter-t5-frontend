@@ -3,6 +3,7 @@ import { useState } from "react";
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 import { useSelector, useDispatch } from "react-redux";
+import { postTweet } from "../redux/tweetsSlice";
 import { actualize } from "../redux/resetSlice";
 
 function TweetModal({ show, handleClose }) {
@@ -13,9 +14,8 @@ function TweetModal({ show, handleClose }) {
   // POST TWEET
   const handleTweet = async (e) => {
     if (tweet !== "") {
-      dispatch(actualize());
       e.preventDefault();
-      await axios({
+      const response = await axios({
         headers: {
           Authorization: `Bearer ${user.userToken}`,
         },
@@ -23,6 +23,8 @@ function TweetModal({ show, handleClose }) {
         url: `${process.env.REACT_APP_API_URL}/tweets/`,
         data: { tweet: tweet },
       });
+      dispatch(postTweet(response.data));
+      dispatch(actualize())
     }
     handleClose();
   };

@@ -1,6 +1,7 @@
 import { configureStore } from "@reduxjs/toolkit";
 import userReducer from "./userSlice";
 import resetReducer from "./resetSlice";
+import tweetsReducer from "./tweetsSlice";
 import storage from 'redux-persist/lib/storage'
 import { combineReducers } from "redux";
 
@@ -8,9 +9,11 @@ import {
   persistStore, persistReducer, FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER
 } from "redux-persist";
 
+
 const rootReducer = combineReducers({
   user: userReducer,
-  reset: resetReducer
+  reset: resetReducer,
+  tweets: tweetsReducer
 });
 
 const persistConfig = {

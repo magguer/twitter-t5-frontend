@@ -1,14 +1,14 @@
 import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import axios from "axios";
-import { actualize } from "../redux/resetSlice";
+import { getTweets, postTweet } from "../redux/tweetsSlice";
 import Tweet from "../partials/Tweet";
 
 function Home() {
-  const [tweets, setTweets] = useState([]);
   const dispatch = useDispatch();
   const user = useSelector((state) => state.user);
   const reset = useSelector((state) => state.reset);
+  const tweets = useSelector((state) => state.tweets);
   const [tweet, setTweet] = useState("");
 
   //Get de tweets
@@ -21,7 +21,7 @@ function Home() {
         method: "get",
         url: `${process.env.REACT_APP_API_URL}/tweets`,
       });
-      setTweets(response.data.tweets);
+      dispatch(getTweets(response.data.tweets))
     };
     getHome();
   }, [reset]); // eslint-disable-line
@@ -29,9 +29,8 @@ function Home() {
   // Post de tweet
   const handleTweet = async (e) => {
     if (tweet !== "") {
-      dispatch(actualize());
       e.preventDefault();
-      await axios({
+      const response = await axios({
         headers: {
           Authorization: `Bearer ${user.userToken}`,
         },
@@ -39,9 +38,14 @@ function Home() {
         url: `${process.env.REACT_APP_API_URL}/tweets/`,
         data: { tweet: tweet },
       });
+      dispatch(postTweet(response.data));
     }
     setTweet("");
+   
   };
+
+
+
 
   return (
     <div className="container-fliud">

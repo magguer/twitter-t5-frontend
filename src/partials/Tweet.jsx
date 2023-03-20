@@ -1,5 +1,6 @@
 import axios from "axios";
 import { useSelector, useDispatch } from "react-redux";
+import { deleteTweet, likeTweet } from "../redux/tweetsSlice";
 import { actualize } from "../redux/resetSlice";
 import { Link } from "react-router-dom";
 import { formatDistance } from "date-fns";
@@ -15,7 +16,6 @@ function Tweet({ tweet }) {
 
   // Delete de tweet
   const handleDeleteTweet = async () => {
-    dispatch(actualize());
     await axios({
       headers: {
         Authorization: `Bearer ${user.userToken}`,
@@ -23,11 +23,13 @@ function Tweet({ tweet }) {
       method: "DELETE",
       url: `http://localhost:8000/tweets/${tweet._id}`,
     });
+    dispatch(deleteTweet(tweet));
   };
 
   /* Like Tweet */
   const likeTweet = async () => {
-    dispatch(actualize());
+    dispatch(actualize())
+    /* dispatch(likeTweet(tweet)) */
     if (!tweetLiked) {
       await axios({
         headers: {
@@ -36,6 +38,8 @@ function Tweet({ tweet }) {
         method: "PATCH",
         url: `http://localhost:8000/tweets/like/${tweet._id}`,
       });
+
+
     } else {
       await axios({
         headers: {
@@ -45,6 +49,7 @@ function Tweet({ tweet }) {
         url: `http://localhost:8000/tweets/dislike/${tweet._id}`,
       });
     }
+
   };
 
   return (
