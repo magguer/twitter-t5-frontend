@@ -4,8 +4,6 @@ import { deleteTweet, likeTweet } from "../redux/tweetsSlice";
 import { actualize } from "../redux/resetSlice";
 import { Link } from "react-router-dom";
 import { formatDistance } from "date-fns";
-import LikesModal from "./LikesModal";
-import { useState } from "react";
 //import { formatDateDistance } from "./date-fns";
 
 function Tweet({ tweet }) {
@@ -13,10 +11,6 @@ function Tweet({ tweet }) {
   const user = useSelector((state) => state.user);
   /* 
   const tweetLiked = true; */
-  const [show, setShow] = useState(false);
-
-  const handleLikesModal = () => setShow(true);
-  const handleClose = () => setShow(false);
 
   const tweetLiked = tweet.likes.some(
     (like) => like.username === user.username
@@ -57,11 +51,8 @@ function Tweet({ tweet }) {
     }
   };
 
-  /*   console.log("CLG de la home", tweet.likes); */
-
   return (
     <>
-      <LikesModal likes={tweet.likes} show={show} handleClose={handleClose} />
       <div className="d-flex w-100 p-3 border-top border-succes gap-3">
         <Link to={`/${tweet.user.username}`}>
           <img
@@ -119,37 +110,32 @@ function Tweet({ tweet }) {
             {/*  Botones */}
             <div className="d-flex w-100 justify-content-between">
               {/*               Botón Like */}
-              <div className="gap-2 border border-white bg-white m-0 p-0 d-flex align-items-center">
-                <button
-                  className="border border-white bg-white m-0 p-0 d-flex align-items-center"
-                  onClick={likeTweet}
-                  type="submit"
-                >
-                  <img
-                    src={
-                      tweetLiked
-                        ? "https://svgur.com/i/qen.svg" //boton rojo
-                        : "https://cdn-icons-png.flaticon.com/512/2961/2961957.png" // boton blanco
-                    }
-                    className="img-fluid object-fit"
-                    style={{ width: "1rem" }}
-                    alt="heart-white"
-                  />
-                </button>
-
+              <button
+                onClick={likeTweet}
+                type="submit"
+                className="gap-2 align-items-center border border-white bg-white m-0 p-0 d-flex align-items-center"
+              >
+                <img
+                  src={
+                    tweetLiked
+                      ? "https://svgur.com/i/qen.svg" //boton rojo
+                      : "https://cdn-icons-png.flaticon.com/512/2961/2961957.png" // boton blanco
+                  }
+                  className="img-fluid object-fit"
+                  style={{ width: "1rem" }}
+                  alt="heart-white"
+                />
                 <h2
-                  onClick={handleLikesModal}
                   style={{
                     fontSize: "0.9rem",
                     color: "#000000",
                     fontWeight: "400",
-                    cursor: "pointer",
                   }}
                   className="m-0"
                 >
                   {tweet.likes.length}
                 </h2>
-              </div>
+              </button>
               {user.username === tweet.user.username && (
                 <button
                   type="submit"

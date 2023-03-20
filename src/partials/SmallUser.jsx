@@ -64,10 +64,7 @@ function SmallUser({ smallUser }) {
                   to={`/${smallUser.username}`}
                   className="text-decoration-none text-black d-flex gap-2 align-items-center"
                 >
-                  <h6
-                    className="mb-0 p-0"
-                    style={{ textOverflow: "elipsis", minWith: "100px" }}
-                  >
+                  <h6 className="mb-0 p-0">
                     {smallUser.firstname} {smallUser.lastname}
                   </h6>
                   {smallUser.verify && (
@@ -91,18 +88,7 @@ function SmallUser({ smallUser }) {
               </div>
             </div>
             {/*  user.userFollowing.some((u) => u._id === smallUser._id) */}
-            {user.username === smallUser.username ? (
-              <Link
-                to={`/${user.username}`}
-                className="btn rounded-pill border px-3"
-                style={{
-                  backgroundColor: "#ffffff",
-                  color: "#d3d3d3",
-                }}
-              >
-                You
-              </Link>
-            ) : !user.following.some((u) => u._id === smallUser._id) ? (
+            {!user.following.some((u) => u._id === smallUser._id) ? (
               <div className="justify-content-end">
                 <button
                   onClick={getFollow}

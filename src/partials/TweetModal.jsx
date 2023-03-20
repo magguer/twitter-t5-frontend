@@ -26,9 +26,7 @@ function TweetModal({ show, handleClose }) {
       dispatch(postTweet(response.data));
       dispatch(actualize());
     }
-
     handleClose();
-    setTweet("");
   };
 
   return (
