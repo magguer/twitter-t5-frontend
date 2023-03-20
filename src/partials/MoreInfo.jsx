@@ -52,6 +52,69 @@ function MoreInfo() {
                     fontWeight: 500,
                   }}
                 >
+                  Trend in Germany
+                </small>
+                <h4 className="fs-6 mb-0">#HerniIsComing</h4>
+                <small
+                  style={{
+                    fontSize: "0.7rem",
+                    color: "#969696",
+                    fontWeight: 500,
+                  }}
+                >
+                  103.8K Tweets
+                </small>
+              </div>
+              <div className="d-flex flex-column">
+                <small
+                  style={{
+                    fontSize: "0.7rem",
+                    color: "#969696",
+                    fontWeight: 500,
+                  }}
+                >
+                  Trending in Hack Academy
+                </small>
+                <h4 className="fs-6 mb-0">#ComeBackFranciscoCobas</h4>
+                <small
+                  style={{
+                    fontSize: "0.7rem",
+                    color: "#969696",
+                    fontWeight: 500,
+                  }}
+                >
+                  95.3K Tweets
+                </small>
+              </div>
+              <div className="d-flex flex-column">
+                <small
+                  style={{
+                    fontSize: "0.7rem",
+                    color: "#969696",
+                    fontWeight: 500,
+                  }}
+                >
+                  Trending in Argentina
+                </small>
+                <h4 className="fs-6 mb-0">#MagguerAtLollapalooza</h4>
+                <small
+                  style={{
+                    fontSize: "0.7rem",
+                    color: "#969696",
+                    fontWeight: 500,
+                  }}
+                >
+                  87.9K Tweets
+                </small>
+              </div>
+              <div className="d-flex flex-column">
+                <small
+                  style={{
+                    fontSize: "0.7rem",
+                    color: "#969696",
+                    fontWeight: 500,
+                  }}
+                >
                   Programming · Trending
                 </small>
                 <h4 className="fs-6 mb-0">#MongoVsSequelize</h4>
@@ -62,7 +125,7 @@ function MoreInfo() {
                     fontWeight: 500,
                   }}
                 >
-                  97.5K Tweets
+                  56.5K Tweets
                 </small>
               </div>
               <div className="d-flex flex-column">
@@ -83,7 +146,7 @@ function MoreInfo() {
                     fontWeight: 500,
                   }}
                 >
-                  34.2K Tweets
+                  55.2K Tweets
                 </small>
               </div>
               <div className="d-flex flex-column">
