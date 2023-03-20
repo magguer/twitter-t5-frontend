@@ -44,7 +44,11 @@ function SmallUser({ smallUser }) {
               {/* Imagen Usuario */}
               <Link to={`/${smallUser.username}`}>
                 <img
-                  style={{ width: "2.5rem" }}
+                  style={{
+                    width: "2.5rem",
+                    height: "2.5rem",
+                    objectFit: "cover",
+                  }}
                   className="figure-img img-fluid rounded-pill align-self-center"
                   alt="images"
                   src={

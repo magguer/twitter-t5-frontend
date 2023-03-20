@@ -51,7 +51,7 @@ function Home() {
         <h5 className="my-4">Home</h5>
         <div className="me-3 d-flex gap-3">
           <img
-            style={{ width: "4rem" }}
+            style={{ width: "4rem", height: "3.5rem", objectFit: "cover" }}
             className="figure-img img-fluid rounded-pill align-self-start"
             alt="images"
             src={
