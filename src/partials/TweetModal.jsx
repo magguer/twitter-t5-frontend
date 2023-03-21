@@ -27,6 +27,7 @@ function TweetModal({ show, handleClose }) {
       dispatch(actualize());
     }
     handleClose();
+    setTweet("");
   };
 
   return (
