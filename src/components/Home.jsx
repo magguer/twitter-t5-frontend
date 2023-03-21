@@ -91,11 +91,13 @@ function Home() {
         </div>
       </form>
       {/*       Tweets List */}
-      <div>
-        {tweets.map((tweet, i) => (
-          <Tweet key={i} tweet={tweet} />
-        ))}
-      </div>
+      {tweets ? (
+        <div>
+          {tweets.map((tweet, i) => (
+            <Tweet key={i} tweet={tweet} />
+          ))}
+        </div>
+      ) : null}
     </div>
   );
 }
