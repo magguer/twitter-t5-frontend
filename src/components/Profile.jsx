@@ -8,8 +8,8 @@ import { actualize } from "../redux/resetSlice";
 import { follow, unfollow } from "../redux/userSlice";
 import EditProfileModal from "../partials/EditProfileModal";
 
-function Profile() {
-  const userNameProfile = useParams();
+function Profile({ unavailableFunction }) {
+  const params = useParams();
   const [userProfile, setUserProfile] = useState(null);
   const user = useSelector((state) => state.user);
   const reset = useSelector((state) => state.reset);
@@ -17,15 +17,33 @@ function Profile() {
   const [userFollowing, setUserFollowing] = useState(null);
 
   useEffect(() => {
-    document.title = `Twitter | ${userNameProfile.username}`;
-  }, [userNameProfile]);
+    document.title = `Twitter | ${params.username}`;
+  }, [params]);
 
   const [show, setShow] = useState(false);
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
-  // patch para follow
+  // GET / user
+  useEffect(() => {
+    const getProfile = async () => {
+      const response = await axios({
+        headers: {
+          Authorization: `Bearer ${user.token}`,
+        },
+        method: "get",
+        url: `${process.env.REACT_APP_API_URL}/usuarios/${params.username}`,
+      });
+      setUserProfile(response.data.userProfile);
+      setUserFollowing(
+        user.following.some((u) => u.username === params.username)
+      );
+    };
+    getProfile();
+  }, [params, reset]); // eslint-disable-line
+
+  // PATCH / follow
   const handleFollow = async () => {
     dispatch(follow(userProfile));
     dispatch(actualize());
@@ -38,7 +56,7 @@ function Profile() {
     });
   };
 
-  // Llamado de Unfollow
+  // PATCH / Unfollow
   const handleUnFollow = async () => {
     dispatch(unfollow(userProfile));
     dispatch(actualize());
@@ -50,24 +68,6 @@ function Profile() {
       url: `${process.env.REACT_APP_API_URL}/usuarios/${userProfile._id}/unfollow`,
     });
   };
-
-  useEffect(() => {
-    const getProfile = async () => {
-      const response = await axios({
-        headers: {
-          Authorization: `Bearer ${user.token}`,
-        },
-        method: "get",
-        url: `${process.env.REACT_APP_API_URL}/usuarios/${userNameProfile.username}`,
-      });
-      setUserProfile(response.data.userProfile);
-      setUserFollowing(
-        user.following.some((u) => u.username === userNameProfile.username)
-      );
-    };
-    // console.log(userProfile);
-    getProfile();
-  }, [userNameProfile, reset]); // eslint-disable-line
 
   return (
     <>
@@ -131,7 +131,7 @@ function Profile() {
             <section id="info-perfil" className="px-3">
               {/* Buttom Profile */}
               <div className="d-flex justify-content-end">
-                {userNameProfile.username !== user.username ? (
+                {params.username !== user.username ? (
                   userFollowing === false ? (
                     <button
                       type="submit"
@@ -236,6 +236,7 @@ function Profile() {
               {userProfile
                 ? userProfile.tweets.map((tweet, i) => (
                     <TweetProfile
+                      unavailableFunction={unavailableFunction}
                       key={i}
                       tweet={tweet}
                       userProfile={userProfile}

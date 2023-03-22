@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import SmallUser from "./SmallUser";
 
-function MoreInfo() {
+function MoreInfo({ unavailableFunction }) {
   const user = useSelector((state) => state.user);
   const [users, setUsers] = useState([]);
 
@@ -27,7 +27,11 @@ function MoreInfo() {
         {/* What's happening */}
         <div className="d-flex flex-column">
           <div className="input-group mb-3">
-            <button className="input-group-text" id="basic-addon1">
+            <button
+              onClick={unavailableFunction}
+              className="input-group-text"
+              id="basic-addon1"
+            >
               <img src="https://svgur.com/i/rJP.svg" alt="" />
             </button>
             <input

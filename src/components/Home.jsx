@@ -4,7 +4,7 @@ import axios from "axios";
 import { getTweets, postTweet } from "../redux/tweetsSlice";
 import Tweet from "../partials/Tweet";
 
-function Home() {
+function Home({ unavailableFunction }) {
   const dispatch = useDispatch();
   const user = useSelector((state) => state.user);
   const reset = useSelector((state) => state.reset);
@@ -94,7 +94,11 @@ function Home() {
       {tweets ? (
         <div>
           {tweets.map((tweet, i) => (
-            <Tweet key={i} tweet={tweet} />
+            <Tweet
+              unavailableFunction={unavailableFunction}
+              key={i}
+              tweet={tweet}
+            />
           ))}
         </div>
       ) : null}

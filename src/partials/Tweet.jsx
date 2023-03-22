@@ -8,7 +8,7 @@ import LikesModal from "./LikesModal";
 import { useState } from "react";
 //import { formatDateDistance } from "./date-fns";
 
-function Tweet({ tweet }) {
+function Tweet({ tweet, unavailableFunction }) {
   const dispatch = useDispatch();
   const user = useSelector((state) => state.user);
   /*
@@ -108,7 +108,7 @@ function Tweet({ tweet }) {
                 @{tweet.user.username}
               </small>
               <small
-                className="p-0 m-0"
+                className="p-0 m-0 d-none d-sm-block"
                 style={{ fontSize: "0.8rem", color: "#969696" }}
               >
                 • {formatDistance(new Date(tweet.createdAt), new Date())}
@@ -118,25 +118,97 @@ function Tweet({ tweet }) {
 
             {/*  Botones */}
             <div className="d-flex w-100 justify-content-between">
-              <div className="d-flex gap-2 aling-items-center">
+              <div className="d-flex gap-5 aling-items-center">
                 {/*               Botón Like */}
-                <button
-                  onClick={likeTweet}
-                  type="submit"
-                  className="gap-2 align-items-center border border-white bg-white m-0 p-0 d-flex align-items-center"
-                >
-                  <img
-                    src={
-                      tweetLiked
-                        ? "https://svgur.com/i/qen.svg" //boton rojo
-                        : "https://cdn-icons-png.flaticon.com/512/2961/2961957.png" // boton blanco
-                    }
-                    className="img-fluid object-fit"
-                    style={{ width: "1rem" }}
-                    alt="heart-white"
-                  />
-                </button>
-                <div style={{ cursor: "pointer" }} onClick={handleShowLikes}>
+                <div className="d-flex gap-2 aling-items-center">
+                  <button
+                    onClick={likeTweet}
+                    type="submit"
+                    className="gap-2 align-items-center border border-white bg-white m-0 p-0 d-flex align-items-center"
+                  >
+                    <img
+                      src={
+                        tweetLiked
+                          ? "https://svgur.com/i/qen.svg" //boton rojo
+                          : "https://cdn-icons-png.flaticon.com/512/2961/2961957.png" // boton blanco
+                      }
+                      className="img-fluid object-fit"
+                      style={{ width: "1rem" }}
+                      alt="heart-white"
+                    />
+                  </button>
+                  <div style={{ cursor: "pointer" }} onClick={handleShowLikes}>
+                    <h2
+                      style={{
+                        fontSize: "0.9rem",
+                        color: "#000000",
+                        fontWeight: "400",
+                      }}
+                      className="m-0"
+                    >
+                      {tweet.likes.length}
+                    </h2>
+                  </div>
+                </div>
+                {/*               Boton Retweet */}
+                <div className="d-flex gap-2 aling-items-center">
+                  <button
+                    onClick={unavailableFunction}
+                    type="submit"
+                    className="gap-2 align-items-center border border-white bg-white m-0 p-0 d-flex align-items-center"
+                  >
+                    <img
+                      src={
+                        "https://i.ibb.co/4dM4gBC/retweet-1.png" // boton blanco
+                      }
+                      className="img-fluid object-fit"
+                      style={{ width: "0.9rem", objectFit: "contain" }}
+                      alt="heart-white"
+                    />
+                  </button>
+                  <div style={{ cursor: "pointer" }} onClick={handleShowLikes}>
+                    <h2
+                      style={{
+                        fontSize: "0.9rem",
+                        color: "#000000",
+                        fontWeight: "400",
+                      }}
+                      className="m-0"
+                    >
+                      0
+                    </h2>
+                  </div>
+                </div>
+                {/*               Boton Comment */}
+                <div className="d-flex gap-2 aling-items-center">
+                  <button
+                    onClick={unavailableFunction}
+                    type="submit"
+                    className="gap-2 align-items-center border border-white bg-white m-0 p-0 d-flex align-items-center"
+                  >
+                    <img
+                      src={
+                        "https://i.ibb.co/t4H3MkX/153-1537658-twitter-comment-icon-png-clipart-png-download-topic.png" // boton blanco
+                      }
+                      className="img-fluid object-fit"
+                      style={{ width: "0.9rem", objectFit: "contain" }}
+                      alt="heart-white"
+                    />
+                  </button>
+                  <div style={{ cursor: "pointer" }} onClick={handleShowLikes}>
+                    <h2
+                      style={{
+                        fontSize: "0.9rem",
+                        color: "#000000",
+                        fontWeight: "400",
+                      }}
+                      className="m-0"
+                    >
+                      0
+                    </h2>
+                  </div>
+                </div>
+                {/*   <div style={{ cursor: "pointer" }} onClick={handleShowLikes}>
                   <h2
                     style={{
                       fontSize: "0.9rem",
@@ -147,10 +219,11 @@ function Tweet({ tweet }) {
                   >
                     {tweet.likes.length}
                   </h2>
-                </div>
+                </div> */}
+              </div>
 
-                {/*               Botón Retweet */}
-                {/*   <button
+              {/*               Botón Retweet */}
+              {/*   <button
                   onClick={likeTweet}
                   type="submit"
                   className="gap-2 align-items-center border border-white bg-white m-0 p-0 d-flex align-items-center"
@@ -176,7 +249,7 @@ function Tweet({ tweet }) {
                     {tweet.likes.length}
                   </h2>
                 </button> */}
-              </div>
+
               {user.username === tweet.user.username && (
                 <button
                   type="submit"

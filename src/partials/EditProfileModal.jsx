@@ -1,5 +1,5 @@
 import axios from "axios";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Modal from "react-bootstrap/Modal";
 import { useSelector, useDispatch } from "react-redux";
 import { edit } from "../redux/userSlice";
@@ -8,13 +8,20 @@ import { actualize } from "../redux/resetSlice";
 function EditProfileModal({ show, handleClose, userProfile }) {
   const dispatch = useDispatch();
   const user = useSelector((state) => state.user);
-  const [username, setUsername] = useState(userProfile.username);
-  const [firstname, setFirstname] = useState(userProfile.firstname);
-  const [lastname, setLastname] = useState(userProfile.lastname);
-  const [description, setDescription] = useState(userProfile.description);
-  const [verify, setVerify] = useState(userProfile.verify);
+  const [username] = useState(userProfile.username);
+  const [firstname, setFirstname] = useState("");
+  const [lastname, setLastname] = useState("");
+  const [description, setDescription] = useState("");
+  const [verify, setVerify] = useState("");
   const [banner, setBanner] = useState(null);
   const [image, setImage] = useState(null);
+
+  useEffect(() => {
+    setFirstname(userProfile.firstname);
+    setLastname(userProfile.lastname);
+    setDescription(userProfile.description);
+    setVerify(userProfile.verify);
+  }, [userProfile]);
 
   const patchUser = async (e) => {
     dispatch(edit({ username, firstname, lastname }));
@@ -37,7 +44,7 @@ function EditProfileModal({ show, handleClose, userProfile }) {
         "Content-Type": "multipart/form-data",
       },
     });
-    /*    window.history.replaceState(null, `${username}`, `/${username}`); */
+    handleClose();
   };
 
   const handleVerify = () => {
@@ -54,15 +61,15 @@ function EditProfileModal({ show, handleClose, userProfile }) {
       onHide={handleClose}
       animation={true}
     >
-      <Modal.Header closeButton>
+      <Modal.Header closeButton style={{ background: "#1d9bf0" }}>
         <Modal.Title>
           {" "}
-          <h2 className="text-center" style={{ fontSize: "1.3rem" }}>
-            Edit Profile
+          <h2 className="text-center text-white" style={{ fontSize: "1.3rem" }}>
+            ✒ Edit Profile
           </h2>
         </Modal.Title>
       </Modal.Header>
-      <form onSubmit={patchUser}>
+      <form onSubmit={(e) => e.preventDefault()}>
         <div className="pt-4 px-4">
           {/*   User Info */}
           <div className="d-flex w-100 justify-content-between">
@@ -119,7 +126,7 @@ function EditProfileModal({ show, handleClose, userProfile }) {
                 type="file"
               />
             </div>
-            <div className="mt-2">
+            <div className="mt-4">
               <img
                 className="rounded-pill ms-4 border border-5 border-white"
                 style={{
@@ -172,8 +179,8 @@ function EditProfileModal({ show, handleClose, userProfile }) {
             <div className="w-100 d-flex mt-4 justify-content-center align-items-center gap-4">
               <button
                 onClick={handleVerify}
-                style={{ background: "red", color: "white" }}
-                className="btn"
+                style={{ background: "white" }}
+                className="btn border"
               >
                 Unverify
               </button>
@@ -188,8 +195,8 @@ function EditProfileModal({ show, handleClose, userProfile }) {
         </div>
         <div className="p-4 d-flex gap-2 w-100 justify-content-end">
           <button
-            className="btn"
-            style={{ background: "red", color: "white" }}
+            className="btn border"
+            style={{ background: "white", color: "black" }}
             onClick={handleClose}
           >
             Close
@@ -197,7 +204,7 @@ function EditProfileModal({ show, handleClose, userProfile }) {
           <button
             className="btn"
             style={{ background: "#1d9bf0", color: "white" }}
-            onClick={handleClose}
+            onClick={patchUser}
           >
             Save
           </button>

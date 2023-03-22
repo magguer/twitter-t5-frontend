@@ -37,9 +37,9 @@ function TweetModal({ show, handleClose }) {
       show={show}
       onHide={handleClose}
     >
-      <Modal.Header closeButton>
+      <Modal.Header closeButton style={{ background: "#1d9bf0" }}>
         <Modal.Title>
-          <h2 className="text-center" style={{ fontSize: "1.1rem" }}>
+          <h2 className="text-center text-white" style={{ fontSize: "1.1rem" }}>
             Post Your Tweet 😉{" "}
           </h2>
         </Modal.Title>
