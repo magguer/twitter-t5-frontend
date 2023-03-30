@@ -1,6 +1,6 @@
 import axios from "axios";
 import { useSelector, useDispatch } from "react-redux";
-import { deleteTweet, likeTweet } from "../redux/tweetsSlice";
+import { deleteTweet } from "../redux/tweetsSlice";
 import { actualize } from "../redux/resetSlice";
 import { Link } from "react-router-dom";
 import { formatDistance } from "date-fns";

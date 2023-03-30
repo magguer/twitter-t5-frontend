@@ -2,21 +2,15 @@ import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import { logOut } from "../redux/userSlice";
-import { toggleDarkMode } from "../redux/darkModeSlice";
 import TweetModal from "./TweetModal";
 
 function Header() {
   const user = useSelector((state) => state.user);
   const dispatch = useDispatch();
-  const isDarkModeEnabled = useSelector((state) => state.darkMode);
-  const [showOptions, setShowOptions] = useState(false);
+  const [showOptions] = useState(false);
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
-
-  const handleToggleDarkMode = () => {
-    dispatch(toggleDarkMode());
-  };
 
   return (
     <>
@@ -62,11 +56,12 @@ function Header() {
                 />
               </Link>
               {/*<!--       Home Anchor --> */}
+
               <Link to={"/"}>
                 <img
                   className="mt-1"
                   style={{ width: "30px" }}
-                  src="https://svgur.com/i/rFm.svg"
+                  src="https://i.ibb.co/KwqxHqc/Fondo.png"
                   alt="home_icon"
                 />
               </Link>

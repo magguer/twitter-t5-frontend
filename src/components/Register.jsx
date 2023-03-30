@@ -32,7 +32,6 @@ function Register() {
       data: formData,
       headers: { "Content-Type": "multipart/form-data" },
     });
-    console.log(response.data);
     if (response.data === "Fill all the fields.") {
       setError("Fill all the fields.");
     } else if (response.data === "User already exist.") {
@@ -45,7 +44,6 @@ function Register() {
           password,
         }
       );
-      console.log(response.data);
       const user = response.data;
       dispatch(login(user));
       navigate(`/`);
