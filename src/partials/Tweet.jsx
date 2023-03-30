@@ -30,7 +30,7 @@ function Tweet({ tweet, unavailableFunction }) {
         Authorization: `Bearer ${user.token}`,
       },
       method: "DELETE",
-      url: `http://localhost:8000/tweets/${tweet._id}`,
+      url: `${process.env.REACT_APP_API_URL}/tweets/${tweet._id}`,
     });
     dispatch(deleteTweet(tweet));
   };
@@ -45,7 +45,7 @@ function Tweet({ tweet, unavailableFunction }) {
           Authorization: `Bearer ${user.token}`,
         },
         method: "PATCH",
-        url: `http://localhost:8000/tweets/like/${tweet._id}`,
+        url: `${process.env.REACT_APP_API_URL}/tweets/like/${tweet._id}`,
       });
     } else {
       await axios({
@@ -53,7 +53,7 @@ function Tweet({ tweet, unavailableFunction }) {
           Authorization: `Bearer ${user.token}`,
         },
         method: "PATCH",
-        url: `http://localhost:8000/tweets/dislike/${tweet._id}`,
+        url: `${process.env.REACT_APP_API_URL}/tweets/dislike/${tweet._id}`,
       });
     }
   };
