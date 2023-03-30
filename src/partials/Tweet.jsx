@@ -166,7 +166,10 @@ function Tweet({ tweet, unavailableFunction }) {
                       alt="heart-white"
                     />
                   </button>
-                  <div style={{ cursor: "pointer" }} onClick={handleShowLikes}>
+                  <div
+                    style={{ cursor: "pointer" }}
+                    onClick={unavailableFunction}
+                  >
                     <h2
                       style={{
                         fontSize: "0.9rem",
@@ -195,7 +198,10 @@ function Tweet({ tweet, unavailableFunction }) {
                       alt="heart-white"
                     />
                   </button>
-                  <div style={{ cursor: "pointer" }} onClick={handleShowLikes}>
+                  <div
+                    style={{ cursor: "pointer" }}
+                    onClick={unavailableFunction}
+                  >
                     <h2
                       style={{
                         fontSize: "0.9rem",
