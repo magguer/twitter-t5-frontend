@@ -196,7 +196,7 @@ function Profile({ unavailableFunction }) {
                         </small>
                         <Link
                           className="text-decoration-none"
-                          to={`${process.env.REACT_APP_API_URL}/${userProfile.username}/followers`}
+                          to={`/${userProfile.username}/followers`}
                           style={{ color: "#647788" }}
                         >
                           Followers
@@ -208,7 +208,7 @@ function Profile({ unavailableFunction }) {
                         </small>
                         <Link
                           className="text-decoration-none"
-                          to={`${process.env.REACT_APP_API_URL}/${userProfile.username}/following`}
+                          to={`/${userProfile.username}/following`}
                           style={{ color: "#647788" }}
                         >
                           Following
