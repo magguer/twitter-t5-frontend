@@ -7,11 +7,11 @@ import { useNavigate, Link } from "react-router-dom";
 import { login } from "../redux/userSlice";
 
 function Login() {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [email, setEmail] = useState("user@default.com");
+  const [password, setPassword] = useState("1234");
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const [error, setError] = useState(" ");
+  const [error, setError] = useState("");
 
   const getToken = async (e) => {
     e.preventDefault();
@@ -22,7 +22,6 @@ function Login() {
         password,
       }
     );
-
     if (
       response.data === "El usuario no existe." ||
       response.data === "La pass es inválida" ||
@@ -80,6 +79,7 @@ function Login() {
                   id="email"
                   name="email"
                   placeholder="name@example.com"
+                  value={email}
                 />
                 <label htmlFor="floatingInput">Email</label>
               </div>
@@ -91,6 +91,7 @@ function Login() {
                   id="password"
                   name="password"
                   placeholder="Password"
+                  value={password}
                 />
                 <label htmlFor="floatingPassword">Password</label>
               </div>

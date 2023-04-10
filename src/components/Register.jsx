@@ -18,20 +18,21 @@ function Register() {
 
   const createUser = async (e) => {
     e.preventDefault();
-
     const formData = new FormData();
     formData.append("firstname", firstname);
     formData.append("lastname", lastname);
-    formData.append("image", image);
+    formData.append("image", image[0]);
     formData.append("email", email);
     formData.append("username", username);
     formData.append("password", password);
+
     const response = await axios({
       method: "POST",
-      url: `${process.env.REACT_APP_API_URL}/usuarios/users`,
+      url: `${process.env.REACT_APP_API_URL}/usuarios`,
       data: formData,
-      headers: { "Content-Type": "multipart/form-data" },
+      headers: { "Content-Type": "multipart/form-dat" },
     });
+
     if (response.data === "Fill all the fields.") {
       setError("Fill all the fields.");
     } else if (response.data === "User already exist.") {
@@ -132,8 +133,7 @@ function Register() {
 
                 <div className="mb-3">
                   <input
-                    onChange={(e) => setImage(e.target.files[0])}
-                    multiple
+                    onChange={(e) => setImage(e.target.files)}
                     className="form-control"
                     name="image"
                     id="image"

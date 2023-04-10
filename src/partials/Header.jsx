@@ -51,7 +51,7 @@ function Header() {
                 {/* <!--       Tweeter Anchor --> */}
                 <img
                   style={{ width: "30px" }}
-                  src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/4f/Twitter-logo.svg/768px-Twitter-logo.svg.png"
+                  src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/39/Logo_of_Twitter%2C_Inc..svg/512px-Logo_of_Twitter%2C_Inc..svg.png?20220821125553"
                   alt="logo_twitter"
                 />
               </Link>
